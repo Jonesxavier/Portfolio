@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Jones Xavier — SRE Portfolio</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      html, body, #app { height: 100%; margin: 0; }
+      body { background: #ece2c2; color: #2b261b; -webkit-font-smoothing: antialiased; }
+      a { color: #785a20; text-decoration: none; }
+      a:hover { color: #9c7c34; }
+      .eyebrow { font-family: Georgia, "Times New Roman", serif; letter-spacing: .34em; text-transform: uppercase; color: #785a20; font-size: .78rem; font-weight: 600; }
+      .rule-line { height: 1px; flex: 1; background: linear-gradient(to right, rgba(120,90,32,.4), rgba(120,90,32,.05)); }
+      .map-btn { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 9999px; border: 1px solid rgba(156,124,52,.4); background: rgba(243,236,214,.85); color: #2b261b; font-size: 1.3rem; line-height: 1; backdrop-filter: blur(4px); cursor: pointer; transition: border-color .15s, color .15s, transform .1s; }
+      .map-btn:hover { border-color: #9c7c34; color: #785a20; }
+      .map-btn:active { transform: scale(.94); }
+      .slide-enter-active, .slide-leave-active { transition: opacity .25s, transform .25s; }
+      .slide-enter-from, .slide-leave-to { opacity: 0; transform: translateY(12px); }
+      @media print { .fixed { position: static !important; } body { background: #fff; } }
+      .loadbar { width: 38%; transform: translateX(-130%); animation: loadbar 0.9s cubic-bezier(.4,0,.2,1) infinite; }
+      @keyframes loadbar { 0% { transform: translateX(-130%); } 100% { transform: translateX(360%); } }
+      .card-enter-active, .card-leave-active { transition: opacity .4s ease; }
+      .card-enter-from, .card-leave-to { opacity: 0; }
+      .swap-enter-active, .swap-leave-active { transition: opacity .22s ease; }
+      .swap-enter-from, .swap-leave-to { opacity: 0; }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="lib/three.min.js"></script>
+    <script src="lib/vue.global.prod.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
