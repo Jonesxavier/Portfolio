@@ -12,7 +12,7 @@ const RESUME = {
     email: 'jones.xavier0987@gmail.com',
     phone: '+91 7530068302',
     location: 'Tamil Nadu, India',
-    github: 'https://github.com/jonesxavier0987',
+    github: 'https://github.com/Jonesxavier',
     linkedin: 'https://www.linkedin.com/in/jonesxavier0987'
   },
   summary:
