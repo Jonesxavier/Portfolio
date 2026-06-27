@@ -1,35 +1,317 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Jones Xavier — SRE Portfolio</title>
-    <link rel="stylesheet" href="styles.css" />
-    <style>
-      html, body, #app { height: 100%; margin: 0; }
-      body { background: #ece2c2; color: #2b261b; -webkit-font-smoothing: antialiased; }
-      a { color: #785a20; text-decoration: none; }
-      a:hover { color: #9c7c34; }
-      .eyebrow { font-family: Georgia, "Times New Roman", serif; letter-spacing: .34em; text-transform: uppercase; color: #785a20; font-size: .78rem; font-weight: 600; }
-      .rule-line { height: 1px; flex: 1; background: linear-gradient(to right, rgba(120,90,32,.4), rgba(120,90,32,.05)); }
-      .map-btn { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 9999px; border: 1px solid rgba(156,124,52,.4); background: rgba(243,236,214,.85); color: #2b261b; font-size: 1.3rem; line-height: 1; backdrop-filter: blur(4px); cursor: pointer; transition: border-color .15s, color .15s, transform .1s; }
-      .map-btn:hover { border-color: #9c7c34; color: #785a20; }
-      .map-btn:active { transform: scale(.94); }
-      .slide-enter-active, .slide-leave-active { transition: opacity .25s, transform .25s; }
-      .slide-enter-from, .slide-leave-to { opacity: 0; transform: translateY(12px); }
-      @media print { .fixed { position: static !important; } body { background: #fff; } }
-      .loadbar { width: 38%; transform: translateX(-130%); animation: loadbar 0.9s cubic-bezier(.4,0,.2,1) infinite; }
-      @keyframes loadbar { 0% { transform: translateX(-130%); } 100% { transform: translateX(360%); } }
-      .card-enter-active, .card-leave-active { transition: opacity .4s ease; }
-      .card-enter-from, .card-leave-to { opacity: 0; }
-      .swap-enter-active, .swap-leave-active { transition: opacity .22s ease; }
-      .swap-enter-from, .swap-leave-to { opacity: 0; }
-    </style>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script src="lib/three.min.js"></script>
-    <script src="lib/vue.global.prod.js"></script>
-    <script src="app.js"></script>
-  </body>
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Jones Xavier — SRE & Automation Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#f4f2ec;--surface:#fffdf8;--ink:#17150f;--muted:#766f5f;--line:#e3ded2;--accent:#d4542a;--green:#2f8f5b;--lensbg:#14130f;--lensink:#f4f2ec;}
+  [data-theme="haze"]{--bg:#d9d6cd;--surface:#e7e4db;--ink:#2b2823;--muted:#6c665a;--line:#c6c1b5;}
+  [data-theme="night"]{--bg:#14130f;--surface:#1e1c16;--ink:#f1ede3;--muted:#9b9485;--line:#2d2a23;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,Arial,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px;}
+  a{color:inherit;text-decoration:none;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.5px;line-height:1.05;}
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  /* nav */
+  nav{position:sticky;top:0;z-index:50;background:var(--bg);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:15px 0;}
+  .brand{font-family:'Space Grotesk';font-weight:700;font-size:16px;}
+  .brand span{color:var(--muted);font-weight:500;font-size:12px;font-family:'JetBrains Mono';}
+  .nlinks{display:flex;align-items:center;gap:24px;font-size:14px;color:var(--muted);}
+  .nlinks a:hover{color:var(--ink);}
+  .tour{background:var(--ink);color:var(--bg);padding:9px 15px;border-radius:9px;font-size:13px;font-weight:500;display:inline-flex;gap:6px;border:none;cursor:pointer;font-family:inherit;}
+  .tour:hover{background:var(--accent);}
+  @media(max-width:840px){.nlinks a{display:none;}}
+  /* hero */
+  .hero{padding:64px 0 30px;display:grid;grid-template-columns:1fr 240px;gap:40px;align-items:center;}
+  @media(max-width:840px){.hero{grid-template-columns:1fr;}}
+  .status{display:inline-flex;align-items:center;gap:9px;font-family:'JetBrains Mono';font-size:13px;color:var(--muted);border:1px solid var(--line);background:var(--surface);padding:7px 13px;border-radius:999px;}
+  .status .d{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(47,143,91,.18);}
+  .hero h1{font-size:clamp(48px,8vw,104px);margin:22px 0 0;}
+  .hero h1 .a{color:var(--accent);}
+  .hero .sub{font-size:18px;color:var(--muted);max-width:34em;margin-top:20px;}
+  .avatar{position:relative;border-radius:20px;aspect-ratio:1/1.12;overflow:hidden;background:linear-gradient(160deg,#e9663c,#c63f15);display:flex;align-items:flex-end;justify-content:center;}
+  .avatar svg{width:90%;height:96%;}
+  .avatar .ph{position:absolute;top:10px;left:12px;font-size:11px;color:rgba(255,255,255,.85);font-family:'JetBrains Mono';}
+  .stats{display:flex;gap:54px;flex-wrap:wrap;padding:34px 0 8px;border-top:1px solid var(--line);margin-top:40px;}
+  .stat .n{font-family:'Space Grotesk';font-weight:700;font-size:42px;}
+  .stat .l{font-family:'JetBrains Mono';font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;}
+  /* section header */
+  section{padding:64px 0;}
+  .shead{display:flex;align-items:baseline;gap:14px;margin-bottom:8px;}
+  .shead .num{font-family:'JetBrains Mono';font-size:13px;color:var(--accent);}
+  .shead .cat{font-family:'JetBrains Mono';font-size:13px;color:var(--muted);}
+  .stmt{font-size:clamp(24px,3.4vw,36px);max-width:20em;margin-bottom:34px;}
+  /* now cards */
+  .nowgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;}
+  .ncard{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 18px 20px;}
+  .ncard .k{font-family:'JetBrains Mono';font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;}
+  .ncard h3{font-size:18px;margin:9px 0 6px;}
+  .ncard p{font-size:14px;color:var(--muted);}
+  /* log ticker */
+  .ticker{margin-top:24px;overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:11px 0;white-space:nowrap;}
+  .ticker .run{display:inline-block;font-family:'JetBrains Mono';font-size:13px;color:var(--muted);animation:scroll 28s linear infinite;}
+  .ticker .run span{color:var(--accent);}
+  @keyframes scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  /* work cards */
+  .work{display:grid;gap:14px;}
+  .wcard{display:grid;grid-template-columns:54px 1fr auto;gap:20px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px;transition:.2s;}
+  .wcard:hover{border-color:var(--accent);transform:translateY(-3px);}
+  .wcard .idx{font-family:'JetBrains Mono';color:var(--muted);font-size:14px;padding-top:4px;}
+  .wcard h3{font-size:20px;}
+  .wcard .yr{font-family:'JetBrains Mono';font-size:12px;color:var(--muted);}
+  .wcard p{font-size:14px;color:var(--muted);margin:7px 0 12px;max-width:48em;}
+  .tags{display:flex;flex-wrap:wrap;gap:7px;}
+  .tag{font-family:'JetBrains Mono';font-size:11px;color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:3px 9px;}
+  @media(max-width:680px){.wcard{grid-template-columns:1fr;}.wcard .yr{grid-column:1;}}
+  /* lab + writing grid */
+  .cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;}
+  .ecard{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;transition:.2s;}
+  .ecard:hover{border-color:var(--accent);transform:translateY(-3px);}
+  .ecard .pill{font-family:'JetBrains Mono';font-size:11px;color:var(--accent);}
+  .ecard h3{font-size:18px;margin:8px 0 7px;}
+  .ecard p{font-size:14px;color:var(--muted);}
+  /* life */
+  .life{background:#14130f;color:#f4f2ec;border:1px solid var(--line);border-radius:22px;padding:40px;display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center;}
+  .life h3{font-size:28px;color:#fff;}.life p{color:#b3ac9c;max-width:38em;margin-top:10px;font-size:15px;}
+  .life .go{background:var(--accent);color:#fff;border:none;border-radius:10px;padding:13px 20px;font-weight:500;font-size:14px;cursor:pointer;font-family:inherit;white-space:nowrap;}
+  @media(max-width:680px){.life{grid-template-columns:1fr;}}
+  /* contact */
+  .contact{text-align:center;padding:80px 0;}
+  .contact h2{font-size:clamp(30px,5vw,52px);max-width:14em;margin:0 auto 22px;}
+  .clinks{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;font-family:'JetBrains Mono';font-size:14px;}
+  .clinks a{border:1px solid var(--line);background:var(--surface);padding:11px 18px;border-radius:10px;}
+  .clinks a:hover{border-color:var(--accent);color:var(--accent);}
+  footer{border-top:1px solid var(--line);padding:26px 0;font-family:'JetBrains Mono';font-size:12px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+
+  #swoosh{position:fixed;inset:0;z-index:300;pointer-events:none;overflow:hidden;visibility:hidden;}
+  #swoosh.go{visibility:visible;}
+  #swoosh .cloud{position:absolute;top:50%;left:50%;width:62vmin;height:62vmin;transform:translate(-50%,-50%) scale(.15);background:radial-gradient(circle,#fff 46%,rgba(255,255,255,.92) 60%,rgba(255,255,255,0) 75%);}
+  #swoosh.go .cloud{animation:divein .9s cubic-bezier(.5,0,.85,.55) forwards;}
+  @keyframes divein{0%{transform:translate(-50%,-50%) scale(.15);opacity:.85;}100%{transform:translate(-50%,-50%) scale(16);opacity:1;}}
+
+  .resume{display:grid;gap:26px;}
+  .rsum{font-size:18px;line-height:1.7;max-width:none;}
+  .rblock .rt{font-family:'JetBrains Mono';font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:14px;}
+  .role{margin-bottom:20px;}
+  .role .rh{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline;}
+  .role .rrole{font-family:'Space Grotesk';font-weight:700;font-size:17px;}
+  .role .rper{font-family:'JetBrains Mono';font-size:12px;color:var(--muted);}
+  .role .rorg{font-size:13px;color:var(--accent);font-weight:500;margin:2px 0 0;}
+  .role ul{list-style:none;padding:0;margin:9px 0 0;}
+  .role li{position:relative;padding-left:18px;font-size:14px;color:var(--muted);margin-bottom:6px;line-height:1.55;}
+  .role li:before{content:"›";position:absolute;left:0;color:var(--accent);}
+  .rgrid{display:grid;grid-template-columns:1.3fr 1fr;gap:30px;}
+  @media(max-width:760px){.rgrid{grid-template-columns:1fr;}}
+  .skg{margin-bottom:15px;}.skg .sgt{font-weight:500;font-size:14px;margin-bottom:7px;}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;}
+  .chip{font-family:'JetBrains Mono';font-size:11px;border:1px solid var(--line);border-radius:6px;padding:3px 9px;background:var(--surface);}
+  .certs{list-style:none;padding:0;margin:0 0 18px;}
+  .certs li{position:relative;padding-left:20px;font-size:14px;color:var(--muted);margin-bottom:6px;}
+  .certs li:before{content:"✓";position:absolute;left:0;color:var(--accent);}
+  .edu p{font-size:14px;color:var(--muted);line-height:1.6;}
+  .dlbtn{display:inline-flex;gap:7px;align-items:center;background:var(--ink);color:var(--bg);padding:11px 17px;border-radius:9px;font-size:13px;font-family:'JetBrains Mono';margin-top:4px;}
+  .dlbtn:hover{background:var(--accent);}
+
+  .more{font-family:'JetBrains Mono';font-size:12px;color:var(--accent);margin-top:11px;}
+  .wmodal{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;background:rgba(20,18,14,.55);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);padding:20px;}
+  .wmodal.open{display:flex;}
+  .wbox{background:var(--surface);border:1px solid var(--line);border-radius:20px;max-width:580px;width:100%;max-height:86vh;overflow:auto;padding:30px 30px 34px;position:relative;}
+  .wbox .x{position:absolute;top:14px;right:16px;cursor:pointer;color:var(--muted);font-size:22px;border:none;background:none;line-height:1;}
+  .wbox h3{font-family:'Space Grotesk';font-size:24px;}
+  .wbox .wsub{font-family:'JetBrains Mono';font-size:12px;color:var(--accent);margin:5px 0 18px;}
+  .wbox ul{list-style:none;padding:0;margin:0;}
+  .wbox li{position:relative;padding-left:22px;margin-bottom:12px;font-size:14px;line-height:1.55;color:var(--ink);}
+  .wbox li:before{content:"▸";position:absolute;left:0;color:var(--accent);}
+  .wcard .yr{display:flex;flex-direction:column;align-items:flex-end;gap:14px;text-align:right;}
+  .warr{font-size:22px;color:var(--muted);transition:.2s;}
+  .wcard:hover .warr{color:var(--accent);transform:translate(2px,-3px);}
+  .tslider{-webkit-appearance:none;appearance:none;width:120px;height:8px;border-radius:999px;background:linear-gradient(to right,#f4f2ec,#b8b4ab,#14130f);border:1px solid var(--line);outline:none;cursor:pointer;display:block;margin:0;}.tslider::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:transparent;border:none;cursor:grab;}
+  .tslider::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:transparent;border:none;cursor:grab;}
+  .pstats{display:grid;grid-template-columns:1fr 1fr;gap:16px 14px;margin-top:18px;}
+  .pstats .stat{flex:1;}
+  .pstats .n{font-size:26px;}
+  .pstats .l{font-size:10px;line-height:1.3;letter-spacing:.04em;}
+  .hstats{display:flex;flex-wrap:nowrap;gap:20px;padding:34px 0 36px;border-top:1px solid var(--line);}
+  .hstats .n{font-size:clamp(24px,3.2vw,38px);}
+  .hstats .stat{flex:1;min-width:0;}
+  @media(max-width:640px){.hstats{flex-wrap:wrap;}.hstats .stat{flex:1 1 42%;}}
+  .upd{margin-left:auto;font-family:'JetBrains Mono';font-size:12px;color:var(--muted);}
+  #arrive{position:fixed;inset:0;z-index:400;pointer-events:none;overflow:hidden;display:none;}#arrive .cloud{position:absolute;top:0;left:0;width:140vw;height:100%;background:linear-gradient(to right,#fff 0%,#fff 80%,rgba(255,255,255,.82) 90%,rgba(255,255,255,0) 100%);}#arrive.go .cloud{animation:arriveoff 1.5s cubic-bezier(.45,0,.4,1) forwards;}@keyframes arriveoff{0%{transform:translateX(0);}100%{transform:translateX(-145%);}}
+  .herowords{position:relative;margin:22px 0 0;}
+  .herowords h1{margin:0;}
+  .herowords .truth{position:absolute;top:-300px;left:-300px;right:-300px;padding:300px;color:var(--lensink);-webkit-clip-path:circle(0px at -200px -200px);clip-path:circle(0px at -200px -200px);pointer-events:none;}
+  .lensable{cursor:none;}
+  #lens{position:fixed;left:-400px;top:-400px;width:230px;height:230px;border-radius:50%;border:2px solid var(--lensbg);box-shadow:0 8px 24px rgba(0,0,0,.18);background:transparent;pointer-events:none;transform:translate(-50%,-50%);z-index:130;display:none;}
+  
+.bookwrap{position:relative;}.bookwrap .truth{position:absolute;top:-220px;left:-220px;right:-220px;padding:220px;color:var(--lensink);-webkit-clip-path:circle(0px at -300px -300px);clip-path:circle(0px at -300px -300px);pointer-events:none;}
+.truth{background:var(--lensbg);}
+  .herowords h1:not(.truth),.bsurface{transition:opacity .4s ease;}
+  .reveal-all .herowords h1:not(.truth),.reveal-all .bsurface{opacity:0;}
+  .reveal-all .truth{-webkit-clip-path:none!important;clip-path:none!important;background:transparent!important;color:var(--ink)!important;}
+  .reveal-all #lens{display:none!important;}
+  .reveal-all .lensable{cursor:auto;}
+.truth .ta{color:var(--accent);}
+  .srvstat{position:relative;}
+  .srvstat .strv{position:absolute;left:0;top:0;right:0;padding:120px;margin:-120px;background:var(--lensbg);color:var(--lensink);white-space:nowrap;-webkit-clip-path:circle(0 at -500px -500px);clip-path:circle(0 at -500px -500px);pointer-events:none;}.srvstat .strv .n,.srvstat .strv .l{color:var(--lensink);}
+  .reveal-all .srvstat .surf{opacity:0;}
+  .ticon{color:var(--muted);display:inline-flex;align-items:center;vertical-align:middle;}
+  .lablist{margin-top:8px;}
+  .labentry{border-top:1px solid var(--line);padding-top:18px;margin-top:30px;}
+  .labentry:first-child{margin-top:18px;}
+  .labup{font-family:'JetBrains Mono';font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px;}
+  .labrow{display:grid;grid-template-columns:230px 1fr 32px;gap:28px;align-items:start;}
+  .labmeta{display:flex;flex-direction:column;gap:9px;font-family:'JetBrains Mono';font-size:12px;text-transform:uppercase;letter-spacing:.08em;}
+  .labstatus{color:var(--accent);display:flex;align-items:center;gap:7px;}
+  .labstatus .d{width:7px;height:7px;border-radius:50%;background:var(--accent);}
+  .labcat{color:var(--muted);}
+  .labbody h3{font-family:'Space Grotesk';font-size:22px;}
+  .labbody p{color:var(--muted);font-size:15px;line-height:1.55;margin-top:8px;max-width:62ch;}
+  .labarrow{color:var(--muted);font-size:20px;text-align:right;transition:.2s;}
+  .labrow:hover .labarrow{color:var(--accent);transform:translateX(4px);}
+  @media(max-width:760px){.labrow{grid-template-columns:1fr;gap:10px;}.labarrow{display:none;}}
+  .themewrap{position:relative;display:inline-block;margin-right:8px;vertical-align:middle;}
+  #thumbman{position:absolute;top:50%;left:13px;transform:translate(-50%,-50%);width:26px;height:26px;pointer-events:none;}
+  #thumbman svg{position:absolute;top:0;left:0;display:block;width:26px;height:26px;transition:opacity .35s ease;}
+  .m-tie{opacity:1;}.m-inc{opacity:0;}
+  #thumbman.dark .m-tie{opacity:0;}#thumbman.dark .m-inc{opacity:1;}
+</style>
+</head>
+<body>
+<nav><div class="wrap nav">
+  <div class="brand">Jones Xavier <span>// Pod Lead-SRE · SaaS Automation</span></div>
+  <div class="nlinks"><a href="#work">Work</a><a href="#resume">Résumé</a><a href="#lab">Lab</a><a href="#log">Travel</a><a href="#life">Life</a><a href="#contact">Contact</a>
+    <span class="themewrap"><input id="themeslider" type="range" min="0" max="100" step="1" value="0" class="tslider" aria-label="theme: day to after dark" title="drag the man: day to after dark"><span id="thumbman"><svg class="m-base" viewBox="0 0 32 32"><path d="M5 31 C5 23 9.5 20 16 20 C22.5 20 27 23 27 31 Z" fill="#15120d"/><circle cx="16" cy="11" r="6.3" fill="#ffffff" stroke="#15120d" stroke-width="1.1"/></svg><svg class="m-acc m-tie" viewBox="0 0 32 32"><path d="M12.8 20 L16 23 L19.2 20" fill="none" stroke="#ffffff" stroke-width="1.3"/><path d="M16 20.5 L14.5 22.5 L16 30 L17.5 22.5 Z" fill="#d4542a"/></svg><svg class="m-acc m-inc" viewBox="0 0 32 32"><line x1="9.3" y1="10.4" x2="6.6" y2="9.5" stroke="#15120d" stroke-width="1.1"/><line x1="22.7" y1="10.4" x2="25.4" y2="9.5" stroke="#15120d" stroke-width="1.1"/><rect x="9.2" y="9.7" width="5.4" height="3.6" rx="1.7" fill="#15120d"/><rect x="17.4" y="9.7" width="5.4" height="3.6" rx="1.7" fill="#15120d"/><line x1="14.6" y1="11" x2="17.4" y2="11" stroke="#15120d" stroke-width="1.3"/><line x1="10.2" y1="10.5" x2="13.2" y2="10.5" stroke="#e8623a" stroke-width="0.8"/></svg></span></span><a class="tour" href="island.html" onclick="event.preventDefault();swoosh('island.html')">Visit Itania &#8599;</a></div>
+</div></nav>
+
+<div class="wrap">
+  <header class="hero">
+    <div>
+      <span class="status"><span class="d"></span>Currently at Aptean — keeping production quiet</span>
+      <div class="herowords lensable"><h1>Gardener.<br>Coder.<br><span class="a">Respawner.</span></h1><h1 class="truth" aria-hidden="true">Marijuana.<br>Spaghetti.<br><span class="ta">F******ck.</span></h1></div>
+      <p class="sub">I keep global product estates running through automation, infrastructure-as-code and AI-driven ops — across AIX, Linux, Windows and Azure.</p>
+    </div>
+    <div class="heroside"><div class="avatar"><span class="ph">// your photo</span><svg viewBox="0 0 200 220" aria-hidden="true"><circle cx="100" cy="78" r="44" fill="#1b1b1b"/><path d="M26,220 C26,150 60,132 100,132 C140,132 174,150 174,220 Z" fill="#1b1b1b"/></svg></div></div>
+  </header>
+
+
+
+  <div class="hstats reveal"><div class="stat"><div class="n">5+</div><div class="l">Years building</div></div><div class="stat"><div class="n">8</div><div class="l">Products led</div></div><div class="stat"><div class="n">250+</div><div class="l">Customers</div></div><div class="stat lensable srvstat"><div class="surf"><div class="n">5K+</div><div class="l">Server heavy lifting</div></div><div class="truth strv" aria-hidden="true"><div class="n">5K+</div><div class="l">Azure managed</div></div></div><div class="stat"><div class="n">700</div><div class="l">On-prem · 2 datacenters</div></div><div class="stat"><div class="n">20+</div><div class="l">AI agents deployed</div></div></div>
+  <section id="now" class="reveal">
+    <div class="shead"><span class="num">01 / Now</span><span class="cat">currently</span><span class="upd">Updated Jun 2026</span></div>
+    <div class="stmt">A snapshot of who I am right now — where I work, what I'm reading and playing, and how I spend weekends.</div>
+    <div class="nowgrid">
+      <div class="ncard"><div class="k">Practice</div><h3>Poems &amp; gratitude</h3><p>I write poems, keep a gratitude habit, and try to stay mindful. Minimalist about most things — never about clothes.</p></div><div class="ncard"><div class="k">Watching</div><h3>From</h3><p>A town nobody can leave, monsters after dark. Half of it would solve if they'd just sit down and talk — man, how hard is it?</p></div>
+      <div class="ncard lensable"><div class="k">Reading</div><div class="bookwrap"><div class="bsurface"><h3>No More Mr Nice Guy</h3><p>Non-fiction. A gut-check on people-pleasing — uncomfortable in the best way.</p></div><div class="truth" aria-hidden="true"><h3>The Score</h3><p>Off Campus #2 — the lovey-dovey (okay, slightly naughty) hockey romance I'd never admit to.</p></div></div></div>
+      <div class="ncard"><div class="k">Playing</div><h3>Ghost of Tsushima</h3><p>Wind-guided. Lost off a cliff twice. F1 and UFC when I need a break from the island.</p></div>
+      
+      
+    </div>
+    
+  </section>
+
+  <section id="work" class="reveal">
+    <div class="shead"><span class="num">02 / Work</span><span class="cat">selected work</span></div>
+    <div class="stmt">Five years keeping software people rely on actually running. A few that say the most.</div>
+    <div class="work">
+      <div class="wcard" onclick="openWork('aptean')" style="cursor:pointer"><div class="idx">01</div><div><h3>Aptean — Senior SRE &amp; Pod Lead</h3><p>Own ops, escalations and infra for the UK product estate (Calidus, Foodware, Axxos &amp; more). Lead a 4-person team building AI agents that kill repetitive patch-validation and triage.</p><div class="tags"><span class="tag">SRE</span><span class="tag">Automation</span><span class="tag">Leadership</span></div></div><div class="yr"><span>2024 →</span><span class="warr">→</span></div></div>
+      <div class="wcard" onclick="openWork('hcl')" style="cursor:pointer"><div class="idx">02</div><div><h3>HCL Tech — Cloud Engineer</h3><p>Maintained 5,000+ Azure servers for PepsiCo with zero P1 escalations at any hour. Cloud operations at real scale.</p><div class="tags"><span class="tag">Azure</span><span class="tag">CloudOps</span><span class="tag">Scale</span></div></div><div class="yr"><span>2020–24</span><span class="warr">→</span></div></div>
+      
+    </div>
+  </section>
+
+  <section id="resume" class="reveal"><div class="shead"><span class="num">02 ·</span><span class="cat">résumé</span></div><div class="stmt">The full record — roles, skills, and the paper to back it up.</div><div class="resume"><p class="rsum">Senior Site Reliability Engineer and pod lead at Aptean with a DevOps / CloudOps background across Azure, AIX, Linux and Windows. I build the automation, IaC and observability — and increasingly the AI agents — that keep mission-critical products reliable, and I lead the people who run them.</p><div class="rblock"><h3 class="rt">Experience</h3><div class="role"><div class="rh"><div class="rrole">Senior Site Reliability Engineer</div><div class="rper">Nov 2024 – Present</div></div><div class="rorg">Aptean Inc</div><ul><li>Pod Lead for the UK SaaS products (Calidus, Foodware, Swords, Axxos, Priam, Proteus, Unity F8, Gouldhall) hosted on Aptean Data Centre, with customers across the globe.</li><li>Lead a 4-person AI &amp; Automation team building agents on Aptean Intelligence to streamline workflow and eliminate repetitive pre/post-patching validation and alert triage.</li><li>Single point of contact during shift for cross-product issues — triage tickets, assign ownership and drive resolution within SLA.</li><li>Own ops, escalations and infra across the customer estate: SSL renewals on Apache/IIS (AIX/Windows), failover and HA.</li><li>D365 F&amp;O deployments via LCS for 250+ customers; brought Terraform, Jenkins and Azure Automate into TechOps from scratch.</li></ul></div><div class="role"><div class="rh"><div class="rrole">Senior CloudOps Engineer</div><div class="rper">May 2021 – Oct 2024</div></div><div class="rorg">HCL Tech</div><ul><li>Led the design of enterprise microservice applications (Commerce Experience Group) driving $3.53B annual revenue on Azure, Cosmos DB, Functions and Key Vault.</li><li>Migrated 15+ on-prem applications and data platforms via Lift &amp; Shift, Azure Migrate and Azure Arc.</li><li>Upgraded Terraform 12.8 → 13.1 and Chef 15 → 17; served a year as Terraform/ARM/Python code approver.</li><li>Mentored a team to a 200% productivity lift building cloud infra from scratch for MRC Global.</li><li>Set up Jenkins CI/CD and fixed a chronic linter failure across 5 repos, improving workflow ~50%.</li></ul></div><div class="role"><div class="rh"><div class="rrole">Cloud Engineer <span style="color:var(--muted);font-weight:400">· Pepsico account</span></div><div class="rper">Dec 2020 – May 2021</div></div><div class="rorg">HCL Tech</div><ul><li>Maintained 5,000+ Azure servers with zero escalations on P1 issues.</li><li>Deployed 30+ Windows, 50+ Linux and 10+ SQL servers, plus 50+ virtual desktops and 25+ Function Apps in six months.</li><li>Ran JIRA sprint boards and completed 90+ pending import tasks during a version upgrade.</li></ul></div></div><div class="rgrid"><div class="rblock"><h3 class="rt">Skills</h3><div class="skg"><div class="sgt">Cloud &amp; Platforms</div><div class="chips"><span class="chip">Microsoft Azure</span><span class="chip">Azure DevOps</span><span class="chip">AWS</span><span class="chip">MS D365 F&amp;O / LCS</span></div></div><div class="skg"><div class="sgt">OS &amp; Infrastructure</div><div class="chips"><span class="chip">AIX Unix</span><span class="chip">Linux</span><span class="chip">Windows</span><span class="chip">SQL Administration</span></div></div><div class="skg"><div class="sgt">Automation &amp; IaC</div><div class="chips"><span class="chip">Terraform</span><span class="chip">CloudFormation</span><span class="chip">Jenkins</span><span class="chip">CI/CD</span><span class="chip">Python</span><span class="chip">YAML</span><span class="chip">Shell</span></div></div><div class="skg"><div class="sgt">Containers &amp; Observability</div><div class="chips"><span class="chip">Kubernetes</span><span class="chip">ArgoCD</span><span class="chip">Helm</span><span class="chip">Prometheus</span><span class="chip">Grafana</span></div></div><div class="skg"><div class="sgt">AI &amp; Practices</div><div class="chips"><span class="chip">Agentic AI</span><span class="chip">Agentic Workflow</span><span class="chip">Incident Response</span></div></div></div><div class="rblock"><h3 class="rt">Certifications</h3><ul class="certs"><li>Microsoft AZ-104 · Azure Administrator</li><li>Microsoft AZ-305 · Azure Solutions Architect</li><li>Microsoft AZ-140 · Azure Virtual Desktop</li><li>AWS Solutions Architect Associate (SAA-C03)</li><li>AWS Solutions Architect Professional (SAP-C02)</li></ul><h3 class="rt">Education</h3><div class="edu"><p><strong>Bachelor of Engineering, Computer Science &amp; Engineering</strong><br>PSNA College of Engineering &amp; Technology (PSNACET)<br>Tamil Nadu, India</p></div></div></div><a class="dlbtn" href="Jones_Xavier_Resume.pdf" download>&#8595; Download PDF</a></div></section>
+  <section id="lab" class="reveal">
+    <div class="shead"><span class="num">03 / Lab</span><span class="cat">automation</span></div>
+    <div class="stmt">The automation I've shipped — agents and tooling that quietly handle the boring, critical work.</div>
+    <div class="lablist">
+      <div class="labentry"><div class="labup">Last updated Jun 2026</div>
+        <div class="labrow"><div class="labmeta"><span class="labstatus"><span class="d"></span>Active</span><span class="labcat">pre / post-patch</span></div>
+          <div class="labbody"><h3>patch-sentinel</h3><p>An agent that runs pre/post-patch validation — service health, SSL expiry, failover state — and posts one green-or-red call before we touch a customer.</p></div>
+          <div class="labarrow">&#8594;</div></div></div>
+      <div class="labentry"><div class="labup">Last updated Jun 2026</div>
+        <div class="labrow"><div class="labmeta"><span class="labstatus"><span class="d"></span>Active</span><span class="labcat">alert ops</span></div>
+          <div class="labbody"><h3>triage-bot</h3><p>Alert triage that kills repetitive noise, classifies severity and routes ownership across the estate automatically.</p></div>
+          <div class="labarrow">&#8594;</div></div></div>
+      <div class="labentry"><div class="labup">Coming soon</div>
+        <div class="labrow"><div class="labmeta"><span class="labstatus"><span class="d"></span>Drafting</span><span class="labcat">your project</span></div>
+          <div class="labbody"><h3>Next on the bench</h3><p>Send tomorrow's write-up and it drops straight into this list.</p></div>
+          <div class="labarrow">&#8594;</div></div></div>
+    </div>
+  </section>
+
+  <section id="log" class="reveal">
+    <div class="shead"><span class="num">04 / Travel diary</span><span class="cat">where I've wandered</span></div>
+    <div class="stmt">Places I've been and what they taught me — a slow-growing travel log.</div>
+    <div class="cards3">
+      <div class="ecard"><div class="pill">somewhere · soon</div><h3>First stop</h3><p>Tell me a place you loved and one thing it taught you — I'll write the card.</p></div>
+      <div class="ecard"><div class="pill">on the list</div><h3>Next on the map</h3><p>Where you're itching to go next, and a line about why.</p></div>
+      <div class="ecard"><div class="pill">memory</div><h3>The one that stuck</h3><p>That trip you still think about — we'll capture it here.</p></div>
+    </div>
+  </section>
+
+  <section id="slice" class="reveal"><div class="shead"><span class="num">05 / Slice of life</span><span class="cat">off the clock</span></div><div class="stmt">Small stories from the everyday — home, the gym, screens, and the occasional win.</div><div class="cards3"><div class="ecard"><div class="pill">gym</div><h3>Getting leaner, slowly</h3><p>The unglamorous middle of a fitness arc. Showing up is the whole trick.</p></div><div class="ecard"><div class="pill">screens</div><h3>This week's watch</h3><p>A running list of films and shows worth an evening. (Real picks dropping in.)</p></div><div class="ecard"><div class="pill">build</div><h3>Weekend self-projects</h3><p>Little things I make just because they should exist — this site being one.</p></div><div class="ecard"><div class="pill">game day</div><h3>Diehard</h3><p>UFC, F1, NFL, the NBA — if it's on, I'm watching it. Loudly.</p></div></div></section>
+  <section id="life" class="reveal">
+    <div class="shead"><span class="num">06 / Life</span><span class="cat">after dark</span></div>
+    <div class="life"><div><h3>An island I built to explore my own career</h3><p>A 3D treasure map of where I've been — HCL villages, the Aptean ring, a gaming isle, and a frontier still unexplored. Take the cloud down and wander it.</p></div><a class="go" href="island.html" onclick="event.preventDefault();swoosh('island.html')" style="display:inline-flex;align-items:center;text-decoration:none">Visit Itania &#8599;</a></div>
+  </section>
+
+  <section id="contact" class="contact reveal">
+    <h2>Got something on fire? Or just want to talk shop?</h2>
+    <div class="clinks"><a href="mailto:jones.xavier0987@gmail.com">jones.xavier0987@gmail.com →</a><a href="https://github.com/Jonesxavier">GitHub ↗</a><a href="https://www.linkedin.com/in/jonesxavier0987">LinkedIn ↗</a></div>
+  </section>
+</div>
+<footer class="wrap"><span>© 2026 Jones Xavier</span><span>SRE · automation · the occasional island</span></footer>
+<script>
+ var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in');});},{threshold:.12});
+ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+</script>
+<div id="swoosh"><div class="cloud"></div></div>
+<script>
+ function swoosh(dest){try{var a=new (window.AudioContext||window.webkitAudioContext)();var t=a.currentTime;var n=a.createBuffer(1,a.sampleRate*1.2,a.sampleRate),d=n.getChannelData(0);for(var i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*(1-i/d.length*.3);var sx=a.createBufferSource();sx.buffer=n;var bp=a.createBiquadFilter();bp.type='bandpass';bp.Q.value=.8;bp.frequency.setValueAtTime(280,t);bp.frequency.exponentialRampToValueAtTime(1600,t+.8);var g=a.createGain();g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.5,t+.1);g.gain.exponentialRampToValueAtTime(.0001,t+1.1);sx.connect(bp);bp.connect(g);g.connect(a.destination);sx.start(t);sx.stop(t+1.15);}catch(e){}setTimeout(function(){window.location=dest;},180);}
+</script>
+<div class="wmodal" id="wmodal"><div class="wbox"><button class="x" onclick="closeWork()" aria-label="close">✕</button><h3 id="wt"></h3><div class="wsub" id="ws"></div><ul id="wl"></ul></div></div>
+<script>
+var WORK={
+ aptean:{t:"Aptean — Senior SRE & Pod Lead",s:"Nov 2024 – Present",i:[
+  "Pod Lead for the UK SaaS products (Calidus, Foodware, Swords, Axxos, Priam, Proteus, Unity F8, Gouldhall), hosted on Aptean Data Centre with customers across the globe.",
+  "Lead a 4-person AI & Automation team building agents on Aptean Intelligence to eliminate repetitive pre/post-patch validation and alert triage.",
+  "Single point of contact during shift for cross-product issues — triage, assign ownership and drive resolution within SLA.",
+  "Own ops, escalations and infra across the estate: SSL renewals on Apache/IIS (AIX/Windows), failover and HA.",
+  "D365 F&O deployments via LCS for 250+ customers; brought Terraform, Jenkins and Azure Automate into TechOps from scratch."]},
+ hcl:{t:"HCL Tech — Cloud & CloudOps Engineer",s:"Dec 2020 – Oct 2024",i:[
+  "Maintained 5,000+ Azure servers for PepsiCo with zero escalations on P1 issues.",
+  "Deployed 30+ Windows, 50+ Linux and 10+ SQL servers, plus 50+ virtual desktops and 25+ Function Apps in six months.",
+  "Led the design of enterprise microservice applications (Commerce Experience Group) driving $3.53B annual revenue on Azure, Cosmos DB, Functions and Key Vault.",
+  "Migrated 15+ on-prem applications via Lift & Shift, Azure Migrate and Azure Arc.",
+  "Upgraded Terraform 12.8 → 13.1 and Chef 15 → 17; Terraform/ARM/Python code approver for a year.",
+  "Mentored a team to a 200% productivity lift building cloud infra from scratch for MRC Global.",
+  "Set up Jenkins CI/CD and fixed a chronic linter failure across 5 repos (~50% workflow improvement)."]}
+};
+function openWork(k){var d=WORK[k];if(!d)return;document.getElementById('wt').textContent=d.t;document.getElementById('ws').textContent=d.s;document.getElementById('wl').innerHTML=d.i.map(function(x){var e=document.createElement('li');e.textContent=x;return e.outerHTML;}).join('');document.getElementById('wmodal').classList.add('open');}
+function closeWork(){document.getElementById('wmodal').classList.remove('open');}
+document.getElementById('wmodal').addEventListener('click',function(e){if(e.target.id==='wmodal')closeWork();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeWork();});
+</script>
+<script>
+(function(){var sl=document.getElementById('themeslider');if(!sl)return;var tm=document.getElementById('thumbman');var L={bg:[244,242,236],surface:[255,253,248],ink:[23,21,15],muted:[118,111,95],line:[227,222,210]},H={bg:[217,214,205],surface:[231,228,219],ink:[43,40,35],muted:[108,102,90],line:[198,193,181]},D={bg:[20,19,15],surface:[30,28,22],ink:[241,237,227],muted:[155,148,133],line:[45,42,35]};function lp(a,b,t){return Math.round(a+(b-a)*t);}function mix(p,q,t){return 'rgb('+lp(p[0],q[0],t)+','+lp(p[1],q[1],t)+','+lp(p[2],q[2],t)+')';}function placeMan(){if(!tm)return;var w=sl.offsetWidth,tw=26,v=sl.value/100;tm.style.left=(v*(w-tw)+tw/2)+'px';}function set(t){var st=document.documentElement.style;['bg','surface','ink','muted','line'].forEach(function(k){var a,b,tt;if(t<=0.5){a=L[k];b=H[k];tt=t/0.5;}else{a=H[k];b=D[k];tt=(t-0.5)/0.5;}st.setProperty('--'+k,mix(a,b,tt));});if(t>=0.6){document.documentElement.classList.add('reveal-all');}else{document.documentElement.classList.remove('reveal-all');}if(tm){tm.classList.toggle('dark',t>=0.6);}placeMan();}sl.addEventListener('input',function(){set(this.value/100);});window.addEventListener('resize',placeMan);placeMan();})();
+</script>
+<div id="arrive"><div class="cloud"></div></div>
+<script>(function(){var ar=document.getElementById("arrive");if(!ar)return;try{if(sessionStorage.getItem("fromTour")){sessionStorage.removeItem("fromTour");ar.style.display="block";requestAnimationFrame(function(){requestAnimationFrame(function(){ar.classList.add("go");});});setTimeout(function(){ar.remove();},1700);}}catch(e){}})();</script>
+<div id="lens"></div>
+<script>
+(function(){var lens=document.getElementById('lens');if(!lens)return;var truths=document.querySelectorAll('.truth');
+ function hide(){truths.forEach(function(tr){tr.style.clipPath='circle(0px at -400px -400px)';tr.style.webkitClipPath=tr.style.clipPath;});}
+ document.addEventListener('mousemove',function(e){if(document.documentElement.classList.contains('reveal-all')){lens.style.display='none';return;}var z=e.target&&e.target.closest?e.target.closest('.lensable'):null;
+  if(z){lens.style.display='block';lens.style.left=e.clientX+'px';lens.style.top=e.clientY+'px';
+   truths.forEach(function(tr){var r=tr.getBoundingClientRect();var cp='circle(118px at '+(e.clientX-r.left)+'px '+(e.clientY-r.top)+'px)';tr.style.clipPath=cp;tr.style.webkitClipPath=cp;});}
+  else{lens.style.display='none';hide();}});
+ document.addEventListener('mouseleave',function(){lens.style.display='none';hide();});})();
+</script>
+</body>
 </html>

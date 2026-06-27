@@ -747,8 +747,8 @@ function createMapScene(container, handlers) {
   const mkRegion = (name, x, z) => { const s = makeTextSprite(name, { fontSize: 96, ls: 11, color: '#46361a', worldHeight: 42 }); s.material.opacity = 0.82; s.position.set(x, terrain.sampleHeight(x, z) + 58, z); return s }
   const regionSprites = RESUME.regions.map((rg) => mkRegion(rg.name, rg.lx, rg.lz))
   regionSprites.forEach((s) => scene.add(s))
-  const sliceLabel = mkRegion('SLICE OF LIFE', L.x, L.z); scene.add(sliceLabel)
-  const lodLabels = regionSprites.concat([sliceLabel])
+  /* slice-of-life label removed — it lives on the website now */
+  const lodLabels = regionSprites.slice()
 
   const fog = buildFog(distanceTo, terrain.sampleHeight, techPts); scene.add(fog.group)
 
@@ -959,7 +959,7 @@ const MapView = {
     onMounted(() => {
       requestAnimationFrame(() => requestAnimationFrame(() => {
         scene = createMapScene(host.value, { onHover: (payload) => { if (payload) { clearTimeout(hideTimer); selected.value = payload } else { clearTimeout(hideTimer); hideTimer = setTimeout(() => { selected.value = null }, 220) } }, onZoom: (d) => { titleVisible.value = d > 420 }, onAnchor: (x, y) => { anchor.value = { x, y } } })
-        setTimeout(() => { loading.value = false }, 650)
+        setTimeout(() => { loading.value = false }, 1500)
       }))
     })
     onBeforeUnmount(() => { if (scene) scene.dispose() })
@@ -1132,7 +1132,7 @@ createApp({
     onMounted(() => { fromHash(); window.addEventListener('hashchange', fromHash) })
     return { view, setView }
   },
-  template: `<div class="font-body"><NavBar :view="view" @nav="setView" />
+  template: `<div class="font-body">
     <MapView v-if="view==='map'" />
     <ResumeView v-else-if="view==='resume'" />
     <GithubView v-else-if="view==='github'" />

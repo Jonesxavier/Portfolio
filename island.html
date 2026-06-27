@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Jones Xavier — SRE Portfolio</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      html, body, #app { height: 100%; margin: 0; }
+      body { background: #ece2c2; color: #2b261b; -webkit-font-smoothing: antialiased; }
+      a { color: #785a20; text-decoration: none; }
+      a:hover { color: #9c7c34; }
+      .eyebrow { font-family: Georgia, "Times New Roman", serif; letter-spacing: .34em; text-transform: uppercase; color: #785a20; font-size: .78rem; font-weight: 600; }
+      .rule-line { height: 1px; flex: 1; background: linear-gradient(to right, rgba(120,90,32,.4), rgba(120,90,32,.05)); }
+      .map-btn { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 9999px; border: 1px solid rgba(156,124,52,.4); background: rgba(243,236,214,.85); color: #2b261b; font-size: 1.3rem; line-height: 1; backdrop-filter: blur(4px); cursor: pointer; transition: border-color .15s, color .15s, transform .1s; }
+      .map-btn:hover { border-color: #9c7c34; color: #785a20; }
+      .map-btn:active { transform: scale(.94); }
+      .slide-enter-active, .slide-leave-active { transition: opacity .25s, transform .25s; }
+      .slide-enter-from, .slide-leave-to { opacity: 0; transform: translateY(12px); }
+      @media print { .fixed { position: static !important; } body { background: #fff; } }
+      .loadbar { width: 38%; transform: translateX(-130%); animation: loadbar 0.9s cubic-bezier(.4,0,.2,1) infinite; }
+      @keyframes loadbar { 0% { transform: translateX(-130%); } 100% { transform: translateX(360%); } }
+      .card-enter-active, .card-leave-active { transition: opacity .4s ease; }
+      .card-enter-from, .card-leave-to { opacity: 0; }
+      .swap-enter-active, .swap-leave-active { transition: opacity .22s ease; }
+      .swap-enter-from, .swap-leave-to { opacity: 0; }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="lib/three.min.js"></script>
+    <script src="lib/vue.global.prod.js"></script>
+    <script src="app.js"></script>
+  <a id="backhome" href="index.html" onclick="event.preventDefault();goHome()" style="position:fixed;left:16px;top:16px;z-index:99999;background:rgba(10,14,20,.6);color:#fff;font:600 13px/1 system-ui,sans-serif;padding:10px 14px;border-radius:9px;text-decoration:none;backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.25)">&#8592; home</a>
+<style>
+#enter,#leave{position:fixed;inset:0;z-index:99998;pointer-events:none;overflow:hidden;}
+#enter{opacity:0;transition:opacity .4s ease;}#enter.go{opacity:1;}
+#leave{z-index:99999;}
+#enter .cloud,#leave .cloud{position:absolute;top:0;left:0;width:140vw;height:100%;background:linear-gradient(to right,#fff 0%,#fff 80%,rgba(255,255,255,.82) 90%,rgba(255,255,255,0) 100%);}
+#leave .cloud{transform:translateX(-145%);}
+#enter.go .cloud{animation:cloudoff 1.8s cubic-bezier(.45,0,.4,1) .7s forwards;}
+#leave.go .cloud{animation:cloudin 1s cubic-bezier(.5,0,.4,1) forwards;}
+@keyframes cloudoff{0%{transform:translateX(0);}100%{transform:translateX(-145%);}}
+@keyframes cloudin{0%{transform:translateX(-145%);}100%{transform:translateX(0);}}
+</style><div id="enter"><div class="cloud"></div></div><div id="leave"><div class="cloud"></div></div><script>
+var en=document.getElementById("enter");
+setTimeout(function(){if(en)en.classList.add("go");},1100);
+setTimeout(function(){if(en)en.remove();},3900);
+function goHome(){var lv=document.getElementById("leave");if(lv)lv.classList.add("go");try{sessionStorage.setItem("fromTour","1");}catch(e){}setTimeout(function(){window.location="index.html";},950);}
+</script>
+</body>
+</html>
