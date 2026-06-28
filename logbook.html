@@ -86,7 +86,7 @@
        .pathDashAnimateTime(function(d){return d.kind==='pulse'?6000:0;})
        .pathAltitude(function(d){return d.kind==='grid'?0.002:0.03;})
        .pathTransitionDuration(0)
-     .arcsData(arcs).arcColor(function(){return '#ff7a45';}).arcStroke(0.7).arcAltitudeAutoScale(0.5).arcDashLength(0.4).arcDashGap(0.6).arcDashInitialGap(function(d){return d.idx*0.25;}).arcDashAnimateTime(2600)
+     .arcsData(arcs).arcColor(function(){return '#ff7a45';}).arcStroke(0.9).arcAltitudeAutoScale(0.85).arcDashLength(0.6).arcDashGap(0.18).arcDashInitialGap(function(d){return d.idx*0.2;}).arcDashAnimateTime(3500)
      .pointsData(places).pointLat('lat').pointLng('lng').pointColor(function(){return '#e8623a';}).pointAltitude(0.035).pointRadius(0.5)
        .pointLabel(function(p){return '<div class="ptip"><img src="places/'+p.slug+'.jpg" onerror="this.remove()"><div class="ptname">'+p.name+'</div></div>';});
    try{ world.globeMaterial().color.set('#efe9dd'); }catch(e){}
