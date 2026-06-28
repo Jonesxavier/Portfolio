@@ -7,8 +7,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{--bg:#f4f2ec;--surface:#fffdf8;--ink:#17150f;--muted:#766f5f;--line:#e3ded2;--accent:#d4542a;--green:#2f8f5b;--lensbg:#14130f;--lensink:#f4f2ec;}
-  [data-theme="haze"]{--bg:#d9d6cd;--surface:#e7e4db;--ink:#2b2823;--muted:#6c665a;--line:#c6c1b5;}
-  [data-theme="night"]{--bg:#14130f;--surface:#1e1c16;--ink:#f1ede3;--muted:#9b9485;--line:#2d2a23;}
   *{box-sizing:border-box;margin:0;padding:0;}
   body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,Arial,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;}
   .wrap{max-width:1080px;margin:0 auto;padding:0 28px;}
@@ -26,23 +24,26 @@
   .nlinks a:hover{color:var(--ink);}
   .tour{background:var(--ink);color:var(--bg);padding:9px 15px;border-radius:9px;font-size:13px;font-weight:500;display:inline-flex;gap:6px;border:none;cursor:pointer;font-family:inherit;}
   .tour:hover{background:var(--accent);}
+  .navmusic{align-items:center;gap:9px;}
+  .navmusic .eq{display:inline-flex;align-items:flex-end;gap:2px;height:12px;}
+  .navmusic .eq i{width:2.5px;height:4px;background:currentColor;border-radius:1px;}
+  .navmusic.playing .eq i{animation:eqb .9s ease-in-out infinite;}
+  .navmusic.playing .eq i:nth-child(2){animation-delay:.15s;}
+  .navmusic.playing .eq i:nth-child(3){animation-delay:.3s;}
+  @keyframes eqb{0%,100%{height:4px}50%{height:12px}}
   @media(max-width:840px){.nlinks a{display:none;}}
   /* hero */
-  .hero{padding:64px 0 30px;display:grid;grid-template-columns:1fr 240px;gap:40px;align-items:center;}
+  .hero{padding:64px 0 30px;display:grid;grid-template-columns:1fr 300px;gap:54px;align-items:center;}
   @media(max-width:840px){.hero{grid-template-columns:1fr;}}
   .status{display:inline-flex;align-items:center;gap:9px;font-family:'JetBrains Mono';font-size:13px;color:var(--muted);border:1px solid var(--line);background:var(--surface);padding:7px 13px;border-radius:999px;}
   .status .d{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(47,143,91,.18);}
-  .hero h1{font-size:clamp(48px,8vw,104px);margin:22px 0 0;}
+  .hero h1{font-size:clamp(56px,9.6vw,118px);letter-spacing:-1.5px;line-height:0.92;margin:22px 0 0;}
   .hero h1 .a{color:var(--accent);}
   .hero .sub{font-size:18px;color:var(--muted);max-width:34em;margin-top:20px;}
-  .avatar{position:relative;border-radius:20px;aspect-ratio:1/1.12;overflow:hidden;background:linear-gradient(160deg,#e9663c,#c63f15);display:flex;align-items:flex-end;justify-content:center;}
-  .avatar svg{width:90%;height:96%;}
-  .avatar .ph{position:absolute;top:10px;left:12px;font-size:11px;color:rgba(255,255,255,.85);font-family:'JetBrains Mono';}
-  .stats{display:flex;gap:54px;flex-wrap:wrap;padding:34px 0 8px;border-top:1px solid var(--line);margin-top:40px;}
   .stat .n{font-family:'Space Grotesk';font-weight:700;font-size:42px;}
   .stat .l{font-family:'JetBrains Mono';font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;}
   /* section header */
-  section{padding:64px 0;}
+  section{padding:64px 0;border-top:1px solid var(--line);}
   .shead{display:flex;align-items:baseline;gap:14px;margin-bottom:8px;}
   .shead .num{font-family:'JetBrains Mono';font-size:13px;color:var(--accent);}
   .shead .cat{font-family:'JetBrains Mono';font-size:13px;color:var(--muted);}
@@ -54,10 +55,6 @@
   .ncard h3{font-size:18px;margin:9px 0 6px;}
   .ncard p{font-size:14px;color:var(--muted);}
   /* log ticker */
-  .ticker{margin-top:24px;overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:11px 0;white-space:nowrap;}
-  .ticker .run{display:inline-block;font-family:'JetBrains Mono';font-size:13px;color:var(--muted);animation:scroll 28s linear infinite;}
-  .ticker .run span{color:var(--accent);}
-  @keyframes scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
   /* work cards */
   .work{display:grid;gap:14px;}
   .wcard{display:grid;grid-template-columns:54px 1fr auto;gap:20px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px;transition:.2s;}
@@ -70,7 +67,9 @@
   .tag{font-family:'JetBrains Mono';font-size:11px;color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:3px 9px;}
   @media(max-width:680px){.wcard{grid-template-columns:1fr;}.wcard .yr{grid-column:1;}}
   /* lab + writing grid */
-  .cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;}
+  .cards3{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;align-items:start;}
+  @media(max-width:820px){.cards3{grid-template-columns:1fr 1fr;}}
+  @media(max-width:480px){.cards3{grid-template-columns:1fr;}}
   .ecard{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;transition:.2s;}
   .ecard:hover{border-color:var(--accent);transform:translateY(-3px);}
   .ecard .pill{font-family:'JetBrains Mono';font-size:11px;color:var(--accent);}
@@ -118,10 +117,9 @@
   .dlbtn{display:inline-flex;gap:7px;align-items:center;background:var(--ink);color:var(--bg);padding:11px 17px;border-radius:9px;font-size:13px;font-family:'JetBrains Mono';margin-top:4px;}
   .dlbtn:hover{background:var(--accent);}
 
-  .more{font-family:'JetBrains Mono';font-size:12px;color:var(--accent);margin-top:11px;}
   .wmodal{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;background:rgba(20,18,14,.55);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);padding:20px;}
   .wmodal.open{display:flex;}
-  .wbox{background:var(--surface);border:1px solid var(--line);border-radius:20px;max-width:580px;width:100%;max-height:86vh;overflow:auto;padding:30px 30px 34px;position:relative;}
+  .wbox{background:var(--surface);border:1px solid var(--line);border-radius:20px;max-width:640px;width:100%;max-height:86vh;overflow:auto;padding:30px 30px 34px;position:relative;}
   .wbox .x{position:absolute;top:14px;right:16px;cursor:pointer;color:var(--muted);font-size:22px;border:none;background:none;line-height:1;}
   .wbox h3{font-family:'Space Grotesk';font-size:24px;}
   .wbox .wsub{font-family:'JetBrains Mono';font-size:12px;color:var(--accent);margin:5px 0 18px;}
@@ -133,10 +131,6 @@
   .wcard:hover .warr{color:var(--accent);transform:translate(2px,-3px);}
   .tslider{-webkit-appearance:none;appearance:none;width:120px;height:8px;border-radius:999px;background:linear-gradient(to right,#f4f2ec,#b8b4ab,#14130f);border:1px solid var(--line);outline:none;cursor:pointer;display:block;margin:0;}.tslider::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:transparent;border:none;cursor:grab;}
   .tslider::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:transparent;border:none;cursor:grab;}
-  .pstats{display:grid;grid-template-columns:1fr 1fr;gap:16px 14px;margin-top:18px;}
-  .pstats .stat{flex:1;}
-  .pstats .n{font-size:26px;}
-  .pstats .l{font-size:10px;line-height:1.3;letter-spacing:.04em;}
   .hstats{display:flex;flex-wrap:nowrap;gap:20px;padding:34px 0 36px;border-top:1px solid var(--line);}
   .hstats .n{font-size:clamp(24px,3.2vw,38px);}
   .hstats .stat{flex:1;min-width:0;}
@@ -144,7 +138,7 @@
   .upd{margin-left:auto;font-family:'JetBrains Mono';font-size:12px;color:var(--muted);}
   #arrive{position:fixed;inset:0;z-index:400;pointer-events:none;overflow:hidden;display:none;}#arrive .cloud{position:absolute;top:0;left:0;width:140vw;height:100%;background:linear-gradient(to right,#fff 0%,#fff 80%,rgba(255,255,255,.82) 90%,rgba(255,255,255,0) 100%);}#arrive.go .cloud{animation:arriveoff 1.5s cubic-bezier(.45,0,.4,1) forwards;}@keyframes arriveoff{0%{transform:translateX(0);}100%{transform:translateX(-145%);}}
   .herowords{position:relative;margin:22px 0 0;}
-  .herowords h1{margin:0;}
+  .herowords h1{margin:0;white-space:nowrap;}
   .herowords .truth{position:absolute;top:-300px;left:-300px;right:-300px;padding:300px;color:var(--lensink);-webkit-clip-path:circle(0px at -200px -200px);clip-path:circle(0px at -200px -200px);pointer-events:none;}
   .lensable{cursor:none;}
   #lens{position:fixed;left:-400px;top:-400px;width:230px;height:230px;border-radius:50%;border:2px solid var(--lensbg);box-shadow:0 8px 24px rgba(0,0,0,.18);background:transparent;pointer-events:none;transform:translate(-50%,-50%);z-index:130;display:none;}
@@ -180,23 +174,62 @@
   #thumbman svg{position:absolute;top:0;left:0;display:block;width:26px;height:26px;transition:opacity .35s ease;}
   .m-tie{opacity:1;}.m-inc{opacity:0;}
   #thumbman.dark .m-tie{opacity:0;}#thumbman.dark .m-inc{opacity:1;}
+.invader{height:.56em;width:.77em;display:inline-block;vertical-align:-.02em;margin-left:.05em;}
+  
+  
+  
+  
+  
+  
+  
+  .idcard{background:var(--accent);border:none;border-radius:20px;padding:14px;text-align:center;}
+  .idphoto{border-radius:14px;overflow:hidden;aspect-ratio:1/1;background:#efe9dd;}
+  .idphoto img{width:100%;height:100%;object-fit:cover;display:block;}
+  .idblank{height:96px;}
+  #lmodal .wbox{max-width:640px;}
+  .lhead h3{font-family:'Space Grotesk';font-size:25px;line-height:1.15;}
+  .lmeta{display:flex;gap:8px;flex-wrap:wrap;font-family:'JetBrains Mono';font-size:11px;margin:10px 0 20px;}
+  .lmeta span{border:1px solid var(--line);border-radius:6px;padding:3px 9px;color:var(--accent);}
+  .msec{margin-bottom:17px;}
+  .msec h4{font-family:'JetBrains Mono';font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:6px;}
+  .msec p{font-size:14px;line-height:1.62;color:var(--ink);}
+  .msec p+p{margin-top:9px;}
+  .wmodal.open .wbox{animation:grow .3s cubic-bezier(.2,.8,.3,1);}
+  @keyframes grow{from{transform:scale(.82);opacity:0;}to{transform:scale(1);opacity:1;}}
+  .herowords .scram{position:absolute;top:0;left:0;right:0;margin:0;color:var(--ink);display:none;opacity:0;pointer-events:none;}
+  .scrambling .herowords h1:not(.scram){opacity:0!important;}
+  .scrambling .herowords .scram{display:block!important;opacity:1!important;}
+  .scrambling #lens{display:none!important;}
+  .labstatus.building{color:var(--muted);}
+  .labstatus.building .d{background:var(--muted);}
+  .rpgtag{font-family:'JetBrains Mono';font-size:12px;color:var(--accent);letter-spacing:.06em;margin-bottom:10px;}
+  .rpgstats{display:grid;grid-template-columns:1fr 1fr;gap:11px 22px;margin-top:20px;max-width:540px;}
+  .rpgstats > div{display:flex;flex-direction:column;gap:3px;border-left:2px solid rgba(212,84,42,.55);padding-left:11px;}
+  .rpgstats .rk{font-family:'JetBrains Mono';font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#8f8979;}
+  .rpgstats .rv{font-family:'JetBrains Mono';font-size:13px;color:#ece7da;}
+  @media(max-width:560px){.rpgstats{grid-template-columns:1fr;}}
+  .vibewrap{position:relative;display:inline-flex;}
+  .forfriends{position:absolute;top:50%;left:100%;transform:translateY(-50%);margin-left:10px;font-family:'JetBrains Mono';font-size:11px;line-height:1;color:var(--accent);white-space:nowrap;pointer-events:none;}
+  @media(max-width:1024px){.forfriends{display:none;}}
+  .truth h3,.truth p{color:var(--lensink)!important;}
+  .reveal-all .truth h3,.reveal-all .truth p{color:var(--ink)!important;}
 </style>
 </head>
 <body>
 <nav><div class="wrap nav">
   <div class="brand">Jones Xavier <span>// Pod Lead-SRE · SaaS Automation</span></div>
-  <div class="nlinks"><a href="#work">Work</a><a href="#resume">Résumé</a><a href="#lab">Lab</a><a href="#log">Travel</a><a href="#life">Life</a><a href="#contact">Contact</a>
-    <span class="themewrap"><input id="themeslider" type="range" min="0" max="100" step="1" value="0" class="tslider" aria-label="theme: day to after dark" title="drag the man: day to after dark"><span id="thumbman"><svg class="m-base" viewBox="0 0 32 32"><path d="M5 31 C5 23 9.5 20 16 20 C22.5 20 27 23 27 31 Z" fill="#15120d"/><circle cx="16" cy="11" r="6.3" fill="#ffffff" stroke="#15120d" stroke-width="1.1"/></svg><svg class="m-acc m-tie" viewBox="0 0 32 32"><path d="M12.8 20 L16 23 L19.2 20" fill="none" stroke="#ffffff" stroke-width="1.3"/><path d="M16 20.5 L14.5 22.5 L16 30 L17.5 22.5 Z" fill="#d4542a"/></svg><svg class="m-acc m-inc" viewBox="0 0 32 32"><line x1="9.3" y1="10.4" x2="6.6" y2="9.5" stroke="#15120d" stroke-width="1.1"/><line x1="22.7" y1="10.4" x2="25.4" y2="9.5" stroke="#15120d" stroke-width="1.1"/><rect x="9.2" y="9.7" width="5.4" height="3.6" rx="1.7" fill="#15120d"/><rect x="17.4" y="9.7" width="5.4" height="3.6" rx="1.7" fill="#15120d"/><line x1="14.6" y1="11" x2="17.4" y2="11" stroke="#15120d" stroke-width="1.3"/><line x1="10.2" y1="10.5" x2="13.2" y2="10.5" stroke="#e8623a" stroke-width="0.8"/></svg></span></span><a class="tour" href="island.html" onclick="event.preventDefault();swoosh('island.html')">Visit Itania &#8599;</a></div>
+  <div class="nlinks"><a href="#work">Work</a><a href="#resume">Résumé</a><a href="#lab">Lab</a><a href="logbook.html">Logbook</a><a href="#life">Life</a><a href="#contact">Contact</a>
+    <span class="themewrap"><input id="themeslider" type="range" min="0" max="100" step="1" value="0" class="tslider" aria-label="theme: day to after dark" title="drag the man: day to after dark"><span id="thumbman"><svg class="m-tie" viewBox="0 0 32 32"><path d="M6 31 C6 23 11 19.5 16 19.5 C21 19.5 26 23 26 31 Z" fill="#15120d"/><circle cx="16" cy="12" r="6.3" fill="#ffffff" stroke="#15120d" stroke-width="1"/><path d="M13 20 L16 25.5 L19 20 Z" fill="#ffffff"/><path d="M16 20.3 L14.9 21.8 L16 28 L17.1 21.8 Z" fill="#15120d"/></svg><svg class="m-inc" viewBox="0 0 32 32"><line x1="22.5" y1="25" x2="29" y2="13" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round"/><line x1="23.4" y1="22.6" x2="26.6" y2="19.9" stroke="#c9c4b6" stroke-width="2.6" stroke-linecap="round"/><path d="M5 31 C5 23 10 19.5 16 19.5 C22 19.5 27 23 27 31 Z" fill="#ffffff" stroke="#15120d" stroke-width="0.8"/><circle cx="16" cy="12" r="6.6" fill="#ffffff" stroke="#15120d" stroke-width="0.8"/><path d="M10 10.4 Q16 8.3 22 10.4 L22 14.3 Q16 12.1 10 14.3 Z" fill="#1c160f"/><circle cx="12.8" cy="12.1" r="1.4" fill="#fff"/><circle cx="19.2" cy="12.1" r="1.4" fill="#fff"/></svg></span></span><span class="vibewrap"><button id="musictoggle" class="tour navmusic" type="button" aria-label="play music, for friends"><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span><span class="mlabel">vibe</span></button><span class="forfriends">&#8592; for friends</span></span></div>
 </div></nav>
 
 <div class="wrap">
   <header class="hero">
     <div>
       <span class="status"><span class="d"></span>Currently at Aptean — keeping production quiet</span>
-      <div class="herowords lensable"><h1>Gardener.<br>Coder.<br><span class="a">Respawner.</span></h1><h1 class="truth" aria-hidden="true">Marijuana.<br>Spaghetti.<br><span class="ta">F******ck.</span></h1></div>
+      <div class="herowords lensable"><h1>Gardener.<br>Coder.<br><span class="a">Respawner.</span></h1><h1 class="truth" aria-hidden="true">Marijuana.<br>VibeCoder<svg class="invader" viewBox="0 0 11 8" fill="#d4542a"><rect x="2" width="1" height="1"/><rect x="8" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="2" y="2" width="7" height="1"/><rect x="1" y="3" width="2" height="1"/><rect x="4" y="3" width="3" height="1"/><rect x="8" y="3" width="2" height="1"/><rect y="4" width="11" height="1"/><rect y="5" width="1" height="1"/><rect x="2" y="5" width="7" height="1"/><rect x="10" y="5" width="1" height="1"/><rect y="6" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="8" y="6" width="1" height="1"/><rect x="10" y="6" width="1" height="1"/><rect x="3" y="7" width="2" height="1"/><rect x="6" y="7" width="2" height="1"/></svg><br><span class="ta">F******ck.</span></h1><h1 class="scram" aria-hidden="true"></h1></div>
       <p class="sub">I keep global product estates running through automation, infrastructure-as-code and AI-driven ops — across AIX, Linux, Windows and Azure.</p>
     </div>
-    <div class="heroside"><div class="avatar"><span class="ph">// your photo</span><svg viewBox="0 0 200 220" aria-hidden="true"><circle cx="100" cy="78" r="44" fill="#1b1b1b"/><path d="M26,220 C26,150 60,132 100,132 C140,132 174,150 174,220 Z" fill="#1b1b1b"/></svg></div></div>
+    <div class="heroside"><div class="idcard"><div class="idphoto"><img src="me.jpg" alt="Jones Xavier"></div><div class="idblank"></div></div></div>
   </header>
 
 
@@ -225,40 +258,49 @@
     </div>
   </section>
 
-  <section id="resume" class="reveal"><div class="shead"><span class="num">02 ·</span><span class="cat">résumé</span></div><div class="stmt">The full record — roles, skills, and the paper to back it up.</div><div class="resume"><p class="rsum">Senior Site Reliability Engineer and pod lead at Aptean with a DevOps / CloudOps background across Azure, AIX, Linux and Windows. I build the automation, IaC and observability — and increasingly the AI agents — that keep mission-critical products reliable, and I lead the people who run them.</p><div class="rblock"><h3 class="rt">Experience</h3><div class="role"><div class="rh"><div class="rrole">Senior Site Reliability Engineer</div><div class="rper">Nov 2024 – Present</div></div><div class="rorg">Aptean Inc</div><ul><li>Pod Lead for the UK SaaS products (Calidus, Foodware, Swords, Axxos, Priam, Proteus, Unity F8, Gouldhall) hosted on Aptean Data Centre, with customers across the globe.</li><li>Lead a 4-person AI &amp; Automation team building agents on Aptean Intelligence to streamline workflow and eliminate repetitive pre/post-patching validation and alert triage.</li><li>Single point of contact during shift for cross-product issues — triage tickets, assign ownership and drive resolution within SLA.</li><li>Own ops, escalations and infra across the customer estate: SSL renewals on Apache/IIS (AIX/Windows), failover and HA.</li><li>D365 F&amp;O deployments via LCS for 250+ customers; brought Terraform, Jenkins and Azure Automate into TechOps from scratch.</li></ul></div><div class="role"><div class="rh"><div class="rrole">Senior CloudOps Engineer</div><div class="rper">May 2021 – Oct 2024</div></div><div class="rorg">HCL Tech</div><ul><li>Led the design of enterprise microservice applications (Commerce Experience Group) driving $3.53B annual revenue on Azure, Cosmos DB, Functions and Key Vault.</li><li>Migrated 15+ on-prem applications and data platforms via Lift &amp; Shift, Azure Migrate and Azure Arc.</li><li>Upgraded Terraform 12.8 → 13.1 and Chef 15 → 17; served a year as Terraform/ARM/Python code approver.</li><li>Mentored a team to a 200% productivity lift building cloud infra from scratch for MRC Global.</li><li>Set up Jenkins CI/CD and fixed a chronic linter failure across 5 repos, improving workflow ~50%.</li></ul></div><div class="role"><div class="rh"><div class="rrole">Cloud Engineer <span style="color:var(--muted);font-weight:400">· Pepsico account</span></div><div class="rper">Dec 2020 – May 2021</div></div><div class="rorg">HCL Tech</div><ul><li>Maintained 5,000+ Azure servers with zero escalations on P1 issues.</li><li>Deployed 30+ Windows, 50+ Linux and 10+ SQL servers, plus 50+ virtual desktops and 25+ Function Apps in six months.</li><li>Ran JIRA sprint boards and completed 90+ pending import tasks during a version upgrade.</li></ul></div></div><div class="rgrid"><div class="rblock"><h3 class="rt">Skills</h3><div class="skg"><div class="sgt">Cloud &amp; Platforms</div><div class="chips"><span class="chip">Microsoft Azure</span><span class="chip">Azure DevOps</span><span class="chip">AWS</span><span class="chip">MS D365 F&amp;O / LCS</span></div></div><div class="skg"><div class="sgt">OS &amp; Infrastructure</div><div class="chips"><span class="chip">AIX Unix</span><span class="chip">Linux</span><span class="chip">Windows</span><span class="chip">SQL Administration</span></div></div><div class="skg"><div class="sgt">Automation &amp; IaC</div><div class="chips"><span class="chip">Terraform</span><span class="chip">CloudFormation</span><span class="chip">Jenkins</span><span class="chip">CI/CD</span><span class="chip">Python</span><span class="chip">YAML</span><span class="chip">Shell</span></div></div><div class="skg"><div class="sgt">Containers &amp; Observability</div><div class="chips"><span class="chip">Kubernetes</span><span class="chip">ArgoCD</span><span class="chip">Helm</span><span class="chip">Prometheus</span><span class="chip">Grafana</span></div></div><div class="skg"><div class="sgt">AI &amp; Practices</div><div class="chips"><span class="chip">Agentic AI</span><span class="chip">Agentic Workflow</span><span class="chip">Incident Response</span></div></div></div><div class="rblock"><h3 class="rt">Certifications</h3><ul class="certs"><li>Microsoft AZ-104 · Azure Administrator</li><li>Microsoft AZ-305 · Azure Solutions Architect</li><li>Microsoft AZ-140 · Azure Virtual Desktop</li><li>AWS Solutions Architect Associate (SAA-C03)</li><li>AWS Solutions Architect Professional (SAP-C02)</li></ul><h3 class="rt">Education</h3><div class="edu"><p><strong>Bachelor of Engineering, Computer Science &amp; Engineering</strong><br>PSNA College of Engineering &amp; Technology (PSNACET)<br>Tamil Nadu, India</p></div></div></div><a class="dlbtn" href="Jones_Xavier_Resume.pdf" download>&#8595; Download PDF</a></div></section>
+  <section id="resume" class="reveal"><div class="shead"><span class="num">03 / Résumé</span><span class="cat">the full record</span></div><div class="stmt">The full record — roles, skills, and the paper to back it up.</div><div class="resume"><p class="rsum">Senior Site Reliability Engineer and pod lead at Aptean with a DevOps / CloudOps background across Azure, AIX, Linux and Windows. I build the automation, IaC and observability — and increasingly the AI agents — that keep mission-critical products reliable, and I lead the people who run them.</p><div class="rblock"><h3 class="rt">Experience</h3><div class="role"><div class="rh"><div class="rrole">Senior Site Reliability Engineer</div><div class="rper">Nov 2024 – Present</div></div><div class="rorg">Aptean Inc</div><ul><li>Pod Lead for the UK SaaS products (Calidus, Foodware, Swords, Axxos, Priam, Proteus, Unity F8, Gouldhall) hosted on Aptean Data Centre, with customers across the globe.</li><li>Lead a 4-person AI &amp; Automation team building agents on Aptean Intelligence to streamline workflow and eliminate repetitive pre/post-patching validation and alert triage.</li><li>Single point of contact during shift for cross-product issues — triage tickets, assign ownership and drive resolution within SLA.</li><li>Own ops, escalations and infra across the customer estate: SSL renewals on Apache/IIS (AIX/Windows), failover and HA.</li><li>D365 F&amp;O deployments via LCS for 250+ customers; brought Terraform, Jenkins and Azure Automate into TechOps from scratch.</li></ul></div><div class="role"><div class="rh"><div class="rrole">Senior CloudOps Engineer</div><div class="rper">May 2021 – Oct 2024</div></div><div class="rorg">HCL Tech</div><ul><li>Led the design of enterprise microservice applications (Commerce Experience Group) driving $3.53B annual revenue on Azure, Cosmos DB, Functions and Key Vault.</li><li>Migrated 15+ on-prem applications and data platforms via Lift &amp; Shift, Azure Migrate and Azure Arc.</li><li>Upgraded Terraform 12.8 → 13.1 and Chef 15 → 17; served a year as Terraform/ARM/Python code approver.</li><li>Mentored a team to a 200% productivity lift building cloud infra from scratch for MRC Global.</li><li>Set up Jenkins CI/CD and fixed a chronic linter failure across 5 repos, improving workflow ~50%.</li></ul></div><div class="role"><div class="rh"><div class="rrole">Cloud Engineer <span style="color:var(--muted);font-weight:400">· Pepsico account</span></div><div class="rper">Dec 2020 – May 2021</div></div><div class="rorg">HCL Tech</div><ul><li>Maintained 5,000+ Azure servers with zero escalations on P1 issues.</li><li>Deployed 30+ Windows, 50+ Linux and 10+ SQL servers, plus 50+ virtual desktops and 25+ Function Apps in six months.</li><li>Ran JIRA sprint boards and completed 90+ pending import tasks during a version upgrade.</li></ul></div></div><div class="rgrid"><div class="rblock"><h3 class="rt">Skills</h3><div class="skg"><div class="sgt">Cloud &amp; Platforms</div><div class="chips"><span class="chip">Microsoft Azure</span><span class="chip">Azure DevOps</span><span class="chip">AWS</span><span class="chip">MS D365 F&amp;O / LCS</span></div></div><div class="skg"><div class="sgt">OS &amp; Infrastructure</div><div class="chips"><span class="chip">AIX Unix</span><span class="chip">Linux</span><span class="chip">Windows</span><span class="chip">SQL Administration</span></div></div><div class="skg"><div class="sgt">Automation &amp; IaC</div><div class="chips"><span class="chip">Terraform</span><span class="chip">CloudFormation</span><span class="chip">Jenkins</span><span class="chip">CI/CD</span><span class="chip">Python</span><span class="chip">YAML</span><span class="chip">Shell</span></div></div><div class="skg"><div class="sgt">Containers &amp; Observability</div><div class="chips"><span class="chip">Kubernetes</span><span class="chip">ArgoCD</span><span class="chip">Helm</span><span class="chip">Prometheus</span><span class="chip">Grafana</span></div></div><div class="skg"><div class="sgt">AI &amp; Practices</div><div class="chips"><span class="chip">Agentic AI</span><span class="chip">Agentic Workflow</span><span class="chip">Incident Response</span></div></div></div><div class="rblock"><h3 class="rt">Certifications</h3><ul class="certs"><li>Microsoft AZ-104 · Azure Administrator</li><li>Microsoft AZ-305 · Azure Solutions Architect</li><li>Microsoft AZ-140 · Azure Virtual Desktop</li><li>AWS Solutions Architect Associate (SAA-C03)</li><li>AWS Solutions Architect Professional (SAP-C02)</li></ul><h3 class="rt">Education</h3><div class="edu"><p><strong>Bachelor of Engineering, Computer Science &amp; Engineering</strong><br>PSNA College of Engineering &amp; Technology (PSNACET)<br>Tamil Nadu, India</p></div></div></div><a class="dlbtn" href="Jones_Xavier_Resume.pdf" download>&#8595; Download PDF</a></div></section>
   <section id="lab" class="reveal">
-    <div class="shead"><span class="num">03 / Lab</span><span class="cat">automation</span></div>
-    <div class="stmt">The automation I've shipped — agents and tooling that quietly handle the boring, critical work.</div>
+    <div class="shead"><span class="num">04 / Lab</span><span class="cat">automation</span></div>
+    <div class="stmt">The automation I've shipped — one a month since March, each running in production. Tap any of the live ones for the full story.</div>
     <div class="lablist">
-      <div class="labentry"><div class="labup">Last updated Jun 2026</div>
-        <div class="labrow"><div class="labmeta"><span class="labstatus"><span class="d"></span>Active</span><span class="labcat">pre / post-patch</span></div>
-          <div class="labbody"><h3>patch-sentinel</h3><p>An agent that runs pre/post-patch validation — service health, SSL expiry, failover state — and posts one green-or-red call before we touch a customer.</p></div>
+      <div class="labentry"><div class="labup">In production · Mar 2026</div>
+        <div class="labrow" onclick="openLab('axxos')" style="cursor:pointer"><div class="labmeta"><span class="labstatus"><span class="d"></span>Active</span><span class="labcat">pre / post-patch</span></div>
+          <div class="labbody"><h3>Axxos patch-validation automation</h3><p>Azure Automation runbooks plus an Aptean Intelligence agent run pre- and post-patch validation and post a single green-or-red call to Teams — hours of manual checks down to minutes.</p></div>
           <div class="labarrow">&#8594;</div></div></div>
-      <div class="labentry"><div class="labup">Last updated Jun 2026</div>
-        <div class="labrow"><div class="labmeta"><span class="labstatus"><span class="d"></span>Active</span><span class="labcat">alert ops</span></div>
-          <div class="labbody"><h3>triage-bot</h3><p>Alert triage that kills repetitive noise, classifies severity and routes ownership across the estate automatically.</p></div>
+      <div class="labentry"><div class="labup">In production · Apr 2026</div>
+        <div class="labrow" onclick="openLab('swords')" style="cursor:pointer"><div class="labmeta"><span class="labstatus"><span class="d"></span>Active</span><span class="labcat">IIS ops · recovery</span></div>
+          <div class="labbody"><h3>Swords IIS operations agent</h3><p>Two agents merged into one: recover any customer site on the Swords server — site restart or app-pool recycle — in a 30-second chat instead of 20–30 minutes of manual RDP, with CrowdStrike left fully enabled.</p></div>
           <div class="labarrow">&#8594;</div></div></div>
-      <div class="labentry"><div class="labup">Coming soon</div>
-        <div class="labrow"><div class="labmeta"><span class="labstatus"><span class="d"></span>Drafting</span><span class="labcat">your project</span></div>
-          <div class="labbody"><h3>Next on the bench</h3><p>Send tomorrow's write-up and it drops straight into this list.</p></div>
+      <div class="labentry"><div class="labup">In production · May 2026</div>
+        <div class="labrow" onclick="openLab('disk')" style="cursor:pointer"><div class="labmeta"><span class="labstatus"><span class="d"></span>Active</span><span class="labcat">AIX · disk space</span></div>
+          <div class="labbody"><h3>Agentic disk-space triage &amp; remediation</h3><p>An agent triages disk-space alerts from 300+ AIX servers behind the jump server, routes what isn't ours, and clears space through an approval-gated DevOps pipeline — hours to minutes.</p></div>
           <div class="labarrow">&#8594;</div></div></div>
+      <div class="labentry"><div class="labup">In progress · Jun 2026</div>
+        <div class="labrow"><div class="labmeta"><span class="labstatus building"><span class="d"></span>Building</span><span class="labcat">terraform · on-prem IaC</span></div>
+          <div class="labbody"><h3>On-prem Terraform IaC</h3><p>Bringing infrastructure-as-code to the on-prem estate — codifying VM provisioning, DNS records, load-balancer pools and the SSL-renewal lifecycle into versioned Terraform modules, with a remote state backend, plan/apply gates and drift detection so on-prem stops being click-ops. Still on the bench — no write-up yet.</p></div>
+          </div></div>
     </div>
   </section>
 
-  <section id="log" class="reveal">
-    <div class="shead"><span class="num">04 / Travel diary</span><span class="cat">where I've wandered</span></div>
-    <div class="stmt">Places I've been and what they taught me — a slow-growing travel log.</div>
-    <div class="cards3">
-      <div class="ecard"><div class="pill">somewhere · soon</div><h3>First stop</h3><p>Tell me a place you loved and one thing it taught you — I'll write the card.</p></div>
-      <div class="ecard"><div class="pill">on the list</div><h3>Next on the map</h3><p>Where you're itching to go next, and a line about why.</p></div>
-      <div class="ecard"><div class="pill">memory</div><h3>The one that stuck</h3><p>That trip you still think about — we'll capture it here.</p></div>
-    </div>
-  </section>
+  
 
-  <section id="slice" class="reveal"><div class="shead"><span class="num">05 / Slice of life</span><span class="cat">off the clock</span></div><div class="stmt">Small stories from the everyday — home, the gym, screens, and the occasional win.</div><div class="cards3"><div class="ecard"><div class="pill">gym</div><h3>Getting leaner, slowly</h3><p>The unglamorous middle of a fitness arc. Showing up is the whole trick.</p></div><div class="ecard"><div class="pill">screens</div><h3>This week's watch</h3><p>A running list of films and shows worth an evening. (Real picks dropping in.)</p></div><div class="ecard"><div class="pill">build</div><h3>Weekend self-projects</h3><p>Little things I make just because they should exist — this site being one.</p></div><div class="ecard"><div class="pill">game day</div><h3>Diehard</h3><p>UFC, F1, NFL, the NBA — if it's on, I'm watching it. Loudly.</p></div></div></section>
+  <section id="slice" class="reveal"><div class="shead"><span class="num">05 / Slice of life</span><span class="cat">off the clock</span></div><div class="stmt">Small stories from the everyday — home, the gym, screens, and the occasional win.</div><div class="cards3"><div class="ecard"><div class="pill">gym</div><h3>Getting leaner, slowly</h3><p>The unglamorous middle of a fitness arc. Showing up is the whole trick.</p></div><div class="ecard"><div class="pill">screens</div><h3>This week's watch</h3><p>A running list of films and shows worth an evening. (Real picks dropping in.)</p></div><div class="ecard"><div class="pill">build</div><h3>Weekend self-projects</h3><p>Little things that should just exist — this site being one. I build Android &amp; iOS apps too, for some reason.</p></div><div class="ecard lensable"><div class="pill">money</div><div class="bookwrap"><div class="bsurface"><h3>Long game, not trades</h3><p>Equity, crypto and mutual funds — held for the long game. Day-trading I steer well clear of; it rarely ends well.</p></div><div class="truth" aria-hidden="true"><h3>Long game, not trades</h3><p>And if I catch you day-trading — imma whoop your ass.</p></div></div></div><div class="ecard lensable"><div class="pill">game day</div><div class="bookwrap"><div class="bsurface"><h3>Diehard</h3><p>UFC, F1, NFL, the NBA — if it's on, I'm watching it. Loudly.</p></div><div class="truth" aria-hidden="true"><h3>Diehard</h3><p>Honestly? I just like watching people beat the sh*t outta each other — tackle, scrap and feud.</p></div></div></div></div></section>
   <section id="life" class="reveal">
     <div class="shead"><span class="num">06 / Life</span><span class="cat">after dark</span></div>
-    <div class="life"><div><h3>An island I built to explore my own career</h3><p>A 3D treasure map of where I've been — HCL villages, the Aptean ring, a gaming isle, and a frontier still unexplored. Take the cloud down and wander it.</p></div><a class="go" href="island.html" onclick="event.preventDefault();swoosh('island.html')" style="display:inline-flex;align-items:center;text-decoration:none">Visit Itania &#8599;</a></div>
+    <div class="life">
+      <div>
+        <div class="rpgtag">&#9656; save file loaded</div>
+        <h3>Itania — my career as a playable map</h3>
+        <p>Every estate I've run is a territory; every P1 was a boss fight. Drop through the clouds and wander the world I actually work in — HCL villages, the Aptean ring, a gaming isle, and a frontier still unmapped.</p>
+        <div class="rpgstats">
+          <div><span class="rk">class</span><span class="rv">Site Reliability Engineer</span></div>
+          <div><span class="rk">level</span><span class="rv">Lv.5 · Pod Lead</span></div>
+          <div><span class="rk">regions</span><span class="rv">AIX · Linux · Windows · Azure</span></div>
+          <div><span class="rk">bosses cleared</span><span class="rv">P1 incidents · 0 escalations</span></div>
+        </div>
+      </div>
+      <a class="go" href="island.html" onclick="event.preventDefault();swoosh('island.html')" style="display:inline-flex;align-items:center;text-decoration:none">&#9654; Enter the world</a>
+    </div>
   </section>
 
   <section id="contact" class="contact reveal">
@@ -276,6 +318,7 @@
  function swoosh(dest){try{var a=new (window.AudioContext||window.webkitAudioContext)();var t=a.currentTime;var n=a.createBuffer(1,a.sampleRate*1.2,a.sampleRate),d=n.getChannelData(0);for(var i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*(1-i/d.length*.3);var sx=a.createBufferSource();sx.buffer=n;var bp=a.createBiquadFilter();bp.type='bandpass';bp.Q.value=.8;bp.frequency.setValueAtTime(280,t);bp.frequency.exponentialRampToValueAtTime(1600,t+.8);var g=a.createGain();g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.5,t+.1);g.gain.exponentialRampToValueAtTime(.0001,t+1.1);sx.connect(bp);bp.connect(g);g.connect(a.destination);sx.start(t);sx.stop(t+1.15);}catch(e){}setTimeout(function(){window.location=dest;},180);}
 </script>
 <div class="wmodal" id="wmodal"><div class="wbox"><button class="x" onclick="closeWork()" aria-label="close">✕</button><h3 id="wt"></h3><div class="wsub" id="ws"></div><ul id="wl"></ul></div></div>
+<div class="wmodal" id="lmodal"><div class="wbox"><button class="x" onclick="closeLab()" aria-label="close">✕</button><div id="lbody"></div></div></div>
 <script>
 var WORK={
  aptean:{t:"Aptean — Senior SRE & Pod Lead",s:"Nov 2024 – Present",i:[
@@ -299,7 +342,7 @@ document.getElementById('wmodal').addEventListener('click',function(e){if(e.targ
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeWork();});
 </script>
 <script>
-(function(){var sl=document.getElementById('themeslider');if(!sl)return;var tm=document.getElementById('thumbman');var L={bg:[244,242,236],surface:[255,253,248],ink:[23,21,15],muted:[118,111,95],line:[227,222,210]},H={bg:[217,214,205],surface:[231,228,219],ink:[43,40,35],muted:[108,102,90],line:[198,193,181]},D={bg:[20,19,15],surface:[30,28,22],ink:[241,237,227],muted:[155,148,133],line:[45,42,35]};function lp(a,b,t){return Math.round(a+(b-a)*t);}function mix(p,q,t){return 'rgb('+lp(p[0],q[0],t)+','+lp(p[1],q[1],t)+','+lp(p[2],q[2],t)+')';}function placeMan(){if(!tm)return;var w=sl.offsetWidth,tw=26,v=sl.value/100;tm.style.left=(v*(w-tw)+tw/2)+'px';}function set(t){var st=document.documentElement.style;['bg','surface','ink','muted','line'].forEach(function(k){var a,b,tt;if(t<=0.5){a=L[k];b=H[k];tt=t/0.5;}else{a=H[k];b=D[k];tt=(t-0.5)/0.5;}st.setProperty('--'+k,mix(a,b,tt));});if(t>=0.6){document.documentElement.classList.add('reveal-all');}else{document.documentElement.classList.remove('reveal-all');}if(tm){tm.classList.toggle('dark',t>=0.6);}placeMan();}sl.addEventListener('input',function(){set(this.value/100);});window.addEventListener('resize',placeMan);placeMan();})();
+(function(){var sl=document.getElementById('themeslider');if(!sl)return;var tm=document.getElementById('thumbman');var scram=document.querySelector('.herowords .scram');var SRC=['Gardener.','Coder.','Respawner.'],TGT=['Marijuana.','VibeCoder.','F******ck.'],GL='ABCDEFGHIJKLMNOPQRSTUVWXYZ#%&*@/?+=';function rch(){return GL[Math.floor(Math.random()*GL.length)];}function morph(S,T,p){var n=Math.max(S.length,T.length),o='';for(var i=0;i<n;i++){var th=i/n;if(p>=th+0.18){o+=(i<T.length?T[i]:'');}else if(p<=th){o+=(i<S.length?S[i]:'');}else{o+=rch();}}return o;}function scramble(t){if(!scram)return;var lo=0.06,hi=0.94;if(t>lo&&t<hi){var p=(t-lo)/(hi-lo);scram.innerHTML=SRC.map(function(s,i){return morph(s,TGT[i],p);}).join('<br>');document.documentElement.classList.add('scrambling');}else{document.documentElement.classList.remove('scrambling');}}var L={bg:[244,242,236],surface:[255,253,248],ink:[23,21,15],muted:[118,111,95],line:[227,222,210]},H={bg:[217,214,205],surface:[231,228,219],ink:[43,40,35],muted:[108,102,90],line:[198,193,181]},D={bg:[20,19,15],surface:[30,28,22],ink:[241,237,227],muted:[155,148,133],line:[45,42,35]};function lp(a,b,t){return Math.round(a+(b-a)*t);}function mix(p,q,t){return 'rgb('+lp(p[0],q[0],t)+','+lp(p[1],q[1],t)+','+lp(p[2],q[2],t)+')';}function placeMan(){if(!tm)return;var w=sl.offsetWidth,tw=26,v=sl.value/100;tm.style.left=(v*(w-tw)+tw/2)+'px';}function set(t){var st=document.documentElement.style;['bg','surface','ink','muted','line'].forEach(function(k){var a,b,tt;if(t<=0.5){a=L[k];b=H[k];tt=t/0.5;}else{a=H[k];b=D[k];tt=(t-0.5)/0.5;}st.setProperty('--'+k,mix(a,b,tt));});if(t>=0.6){document.documentElement.classList.add('reveal-all');}else{document.documentElement.classList.remove('reveal-all');}if(tm){tm.classList.toggle('dark',t>=0.6);}var dk=t>=0.6;if(dk&&!window.__dk){window.__dk=1;if(window.darkCue)darkCue();}else if(!dk){if(window.__dk&&window.darkStop)darkStop();window.__dk=0;}scramble(t);placeMan();}sl.addEventListener('input',function(){set(this.value/100);});window.setTheme=function(t){t=Math.max(0,Math.min(1,t));sl.value=Math.round(t*100);set(t);};window.toggleDark=function(){var goDark=!document.documentElement.classList.contains('reveal-all');var start=sl.value/100,target=goDark?1:0,t0=performance.now(),dur=700;function step(now){var k=Math.min(1,(now-t0)/dur);var v=start+(target-start)*k;sl.value=Math.round(v*100);set(v);if(k<1)requestAnimationFrame(step);}requestAnimationFrame(step);};window.addEventListener('resize',placeMan);placeMan();})();
 </script>
 <div id="arrive"><div class="cloud"></div></div>
 <script>(function(){var ar=document.getElementById("arrive");if(!ar)return;try{if(sessionStorage.getItem("fromTour")){sessionStorage.removeItem("fromTour");ar.style.display="block";requestAnimationFrame(function(){requestAnimationFrame(function(){ar.classList.add("go");});});setTimeout(function(){ar.remove();},1700);}}catch(e){}})();</script>
@@ -307,11 +350,39 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeWork();
 <script>
 (function(){var lens=document.getElementById('lens');if(!lens)return;var truths=document.querySelectorAll('.truth');
  function hide(){truths.forEach(function(tr){tr.style.clipPath='circle(0px at -400px -400px)';tr.style.webkitClipPath=tr.style.clipPath;});}
- document.addEventListener('mousemove',function(e){if(document.documentElement.classList.contains('reveal-all')){lens.style.display='none';return;}var z=e.target&&e.target.closest?e.target.closest('.lensable'):null;
-  if(z){lens.style.display='block';lens.style.left=e.clientX+'px';lens.style.top=e.clientY+'px';
-   truths.forEach(function(tr){var r=tr.getBoundingClientRect();var cp='circle(118px at '+(e.clientX-r.left)+'px '+(e.clientY-r.top)+'px)';tr.style.clipPath=cp;tr.style.webkitClipPath=cp;});}
-  else{lens.style.display='none';hide();}});
- document.addEventListener('mouseleave',function(){lens.style.display='none';hide();});})();
+ document.addEventListener('mousemove',function(e){if(document.documentElement.classList.contains('reveal-all')){lens.style.display='none';hide();return;}if(!(e.target.closest&&e.target.closest('.lensable'))){lens.style.display='none';hide();return;}lens.style.display='block';lens.style.left=e.clientX+'px';lens.style.top=e.clientY+'px';
+  truths.forEach(function(tr){var r=tr.getBoundingClientRect();var cp='circle(118px at '+(e.clientX-r.left)+'px '+(e.clientY-r.top)+'px)';tr.style.clipPath=cp;tr.style.webkitClipPath=cp;});});
+ document.addEventListener('mouseleave',function(){lens.style.display='none';hide();});window.addEventListener('blur',function(){lens.style.display='none';hide();});window.addEventListener('scroll',function(){lens.style.display='none';hide();},{passive:true});})();
+</script>
+<audio id="song" loop preload="auto"><source src="music/the-next-episode.mp3" type="audio/mpeg"></audio>
+<script>
+function song(){return document.getElementById("song");}
+function darkCue(){var a=song();if(a){var p=a.play();if(p&&p.catch)p.catch(function(){});}setMusicUI(true);}
+function darkStop(){var a=song();if(a){a.pause();}setMusicUI(false);}
+function setMusicUI(on){var b=document.getElementById("musictoggle");if(!b)return;b.classList.toggle("playing",on);var l=b.querySelector(".mlabel");if(l)l.textContent=on?"dr dre mo**erf***ers":"vibe";}
+document.addEventListener("DOMContentLoaded",function(){var b=document.getElementById("musictoggle");if(!b)return;b.addEventListener("click",function(){var goingDark=!document.documentElement.classList.contains("reveal-all");var a=document.getElementById("song");if(a){if(goingDark){var p=a.play();if(p&&p.catch)p.catch(function(){});}else{a.pause();}}setMusicUI(goingDark);if(window.toggleDark)window.toggleDark();});});
+</script>
+<script>
+var LAB={
+ axxos:{t:"Axxos patch-validation automation",meta:["Active · in production","pre / post-patch","Azure Automation"],sec:[
+  {h:"Problem",p:["Monthly Windows patching across our servers meant manual pre-checks (service baseline) and post-checks (KB installation, reboot timing, service-restart verification). Each cycle ate hours of engineer time, was inconsistent run-to-run, and left audit gaps."]},
+  {h:"Solution",p:["Pre- and post-patch Azure Automation runbooks fire from Maintenance Configuration events, run the service operations and KB validation via Invoke-AzVMRunCommand against tagged VMs, and report outcomes to Teams.","An agent in Aptean Intelligence Studio sits on top of the runbooks: an engineer can chat to run pre-checks against a single server, kick off the patch validation, or inspect the last run."]},
+  {h:"Impact",p:["Hours to minutes per cycle. Every action logged in Azure Automation history. The pattern is reusable across any Aptean product running on Azure."]}]},
+ swords:{t:"Swords IIS operations agent",meta:["Active · in production","IIS ops · recovery","2 agents into 1"],sec:[
+  {h:"Problem",p:["The Swords application kept going down from a deadlock between CrowdStrike and the IIS worker process (w3wp.exe). Microsoft confirmed the root cause and recommended excluding w3wp.exe from CrowdStrike scanning — but that would strip endpoint protection from worker processes on a customer-facing, multi-tenant production server, so we judged the trade-off unacceptable.","Rebuilding Swords on a newer stack is a real option, but high-effort, high-risk and long-timeline. Meanwhile the manual recovery (RDP, find the customer site, recycle in IIS Manager, verify) took 20-30 minutes per incident and put an engineer in the critical path of every outage, including out-of-hours."]},
+  {h:"Solution — site-down recovery",p:["When a 'cloud down' alert arrives or a customer reports their site down, the engineer chats with the agent, confirms the affected customer from the 72-customer inventory, and the agent triggers the Swords-IIS-Restart pipeline (4323): restart the IIS site, verify the URL is reachable, and post the outcome to the Swords Operations Teams channel. This resolves the majority of incidents."]},
+  {h:"Solution — deadlock recovery",p:["When the CrowdStrike-w3wp deadlock has stuck a worker process, a restart alone won't release it. The engineer triggers the Swords-Pool-Recycle pipeline (4326), which recycles the app pool and, if needed, force-kills lingering w3wp.exe processes for that pool. Both paths share the same customer inventory, Teams notification and DevOps audit trail."]},
+  {h:"Impact",p:["30 minutes of focused engineer effort becomes a 30-second chat. Anyone on TechOps can recover any customer site from any device, with a full audit trail through DevOps and Teams.","CrowdStrike stays fully enabled on every worker process — the security posture Microsoft proposed weakening is intact — and human-in-the-loop confirmation is preserved. Combined with a prevention layer (short worker lifetime via a 1-hour staggered recycle), the deadlock is mitigated structurally rather than by relaxing endpoint protection."]},
+  {h:"Where it's heading",p:["A pre-emptive escalation cascade: when Dynatrace emits a 'URL down' alert for a Swords customer, an Outlook MCP server reads the alert, the agent identifies the affected customer from the alert body, and triggers recovery automatically — removing the engineer-in-the-middle step when the pattern is unambiguous."]}]},
+ disk:{t:"Agentic disk-space triage and remediation",meta:["Active · in production","AIX · disk space","approval-gated"],sec:[
+  {h:"Problem",p:["Our ~300 AIX servers — reachable only through the jump server — continuously send disk-space alerts from root@aix. Every alert is handled by hand: read the mail, log in via the jump server, work out what's filling the filesystem, decide what's safe, and clear it. It's slow, repetitive, error-prone and doesn't scale — and not every alert is even ours to fix."]},
+  {h:"Solution",p:["An AI agent monitors the AIX disk-space alerts from root via Outlook, identifies the affected path, and routes application or database issues to the right team. For routine cases it requests approval; once approved, it triggers an Azure DevOps pipeline running under a service account on the jump server to safely clear space on the AIX server."]},
+  {h:"Impact",p:["Routine disk-space alerts that used to need an engineer logged in through the jump server are now resolved with a single approval — response time from hours to minutes. Misrouted alerts reach the right team automatically; every action is approval-gated, reversible and audited; and it scales effortlessly across the 300+ server estate."]}]}
+};
+function openLab(k){var d=LAB[k];if(!d)return;var h='<div class="lhead"><h3>'+d.t+'</h3></div><div class="lmeta">'+d.meta.map(function(m){return '<span>'+m+'</span>';}).join('')+'</div>';h+=d.sec.map(function(s){return '<div class="msec"><h4>'+s.h+'</h4>'+s.p.map(function(x){return '<p>'+x+'</p>';}).join('')+'</div>';}).join('');document.getElementById('lbody').innerHTML=h;document.getElementById('lmodal').classList.add('open');}
+function closeLab(){document.getElementById('lmodal').classList.remove('open');}
+document.getElementById('lmodal').addEventListener('click',function(e){if(e.target.id==='lmodal')closeLab();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLab();});
 </script>
 </body>
 </html>
