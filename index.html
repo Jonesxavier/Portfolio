@@ -84,12 +84,12 @@
   .contact{text-align:center;padding:80px 0;}
   .contact h2{font-size:clamp(30px,5vw,52px);max-width:14em;margin:0 auto 22px;}
   .clinks{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;font-family:'Inter',system-ui,sans-serif;font-size:14px;font-weight:500;}
-  .clinks a{border:1px solid var(--line);background:var(--surface);padding:11px 18px;border-radius:10px;}
-  .clinks .mailbtn{background:var(--ink);color:var(--bg);border-color:var(--ink);}
+  .clinks a{border:1px solid var(--ink);background:var(--ink);color:var(--bg);padding:11px 18px;border-radius:10px;display:inline-grid;align-items:center;justify-items:center;transition:border-color .25s ease;}
   .clinks a:hover{border-color:var(--accent);}
-  .clinks a .rev{display:none;}
-  .clinks a:hover .lbl{display:none;}
-  .clinks a:hover .rev{display:inline;}
+  .clinks a .lbl,.clinks a .rev{grid-area:1/1;transition:opacity .3s ease;}
+  .clinks a .rev{opacity:0;}
+  .clinks a:hover .lbl{opacity:0;}
+  .clinks a:hover .rev{opacity:1;}
   footer{border-top:1px solid var(--line);padding:26px 0;font-family:'JetBrains Mono';font-size:12px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
 
   #swoosh{position:fixed;inset:0;z-index:300;pointer-events:none;overflow:hidden;visibility:hidden;}
@@ -310,7 +310,7 @@
 
   <section id="contact" class="contact reveal">
     <h2>Got something on fire? Or just want to talk shop?</h2>
-    <div class="clinks"><a class="mailbtn" href="mailto:jones.xavier0987@gmail.com"><span class="lbl">Constructive criticism / feedback</span><span class="rev">jones.xavier0987@gmail.com</span></a><a href="https://github.com/Jonesxavier"><span class="lbl">GitHub &#8599;</span><span class="rev">want to f*rk my code</span></a><a href="https://www.linkedin.com/in/jonesxavier0987"><span class="lbl">LinkedIn &#8599;</span><span class="rev">Check me out (professionally)</span></a></div>
+    <div class="clinks"><a class="mailbtn" href="mailto:jones.xavier0987@gmail.com"><span class="lbl">Constructive criticism / feedback</span><span class="rev">jones.xavier0987@gmail.com</span></a><a href="https://github.com/Jonesxavier"><span class="lbl">GitHub <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true" style="vertical-align:-1px"><path d="M2.5 7.5 L7.5 2.5 M4 2.5 L7.5 2.5 L7.5 6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="rev">want to f*rk my code</span></a><a href="https://www.linkedin.com/in/jonesxavier0987"><span class="lbl">LinkedIn <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true" style="vertical-align:-1px"><path d="M2.5 7.5 L7.5 2.5 M4 2.5 L7.5 2.5 L7.5 6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="rev">Check me out (professionally)</span></a></div>
   </section>
 </div>
 <footer class="wrap"><span>© 2026 Jones Xavier</span><span>SRE · automation · the occasional island</span></footer>
