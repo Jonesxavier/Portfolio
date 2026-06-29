@@ -83,9 +83,13 @@
   /* contact */
   .contact{text-align:center;padding:80px 0;}
   .contact h2{font-size:clamp(30px,5vw,52px);max-width:14em;margin:0 auto 22px;}
-  .clinks{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;font-family:'JetBrains Mono';font-size:14px;}
+  .clinks{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;font-family:'Inter',system-ui,sans-serif;font-size:14px;font-weight:500;}
   .clinks a{border:1px solid var(--line);background:var(--surface);padding:11px 18px;border-radius:10px;}
-  .clinks a:hover{border-color:var(--accent);color:var(--accent);}
+  .clinks .mailbtn{background:var(--ink);color:var(--bg);border-color:var(--ink);}
+  .clinks a:hover{border-color:var(--accent);}
+  .clinks a .rev{display:none;}
+  .clinks a:hover .lbl{display:none;}
+  .clinks a:hover .rev{display:inline;}
   footer{border-top:1px solid var(--line);padding:26px 0;font-family:'JetBrains Mono';font-size:12px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
 
   #swoosh{position:fixed;inset:0;z-index:300;pointer-events:none;overflow:hidden;visibility:hidden;}
@@ -213,6 +217,7 @@
   @media(max-width:1024px){.forfriends{display:none;}}
   .truth h3,.truth p{color:var(--lensink)!important;}
   .reveal-all .truth h3,.reveal-all .truth p{color:var(--ink)!important;}
+  .clinks .mailbtn:hover .rev{color:var(--accent);}
 </style>
 </head>
 <body>
@@ -239,7 +244,7 @@
     <div class="shead"><span class="num">01 / Now</span><span class="cat">currently</span><span class="upd">Updated Jun 2026</span></div>
     <div class="stmt">A snapshot of who I am right now — where I work, what I'm reading and playing, and how I spend weekends.</div>
     <div class="nowgrid">
-      <div class="ncard"><div class="k">Practice</div><h3>Poems &amp; gratitude</h3><p>I write poems, keep a gratitude habit, and try to stay mindful. Minimalist about most things — never about clothes.</p></div><div class="ncard"><div class="k">Watching</div><h3>From</h3><p>A town nobody can leave, monsters after dark. Half of it would solve if they'd just sit down and talk — man, how hard is it?</p></div>
+      <div class="ncard"><div class="k">Practice</div><h3>Poems &amp; gratitude</h3><p>I write poems, keep a gratitude habit, and try to stay mindful. Minimalist about most things — never about clothes.</p></div><div class="ncard"><div class="k">Watching</div><h3>From</h3><p>A town nobody can leave, monsters after dark. Half the problem would've been solved if those guys just sat and talked — man, how hard is it?</p></div>
       <div class="ncard lensable"><div class="k">Reading</div><div class="bookwrap"><div class="bsurface"><h3>No More Mr Nice Guy</h3><p>Non-fiction. A gut-check on people-pleasing — uncomfortable in the best way.</p></div><div class="truth" aria-hidden="true"><h3>The Score</h3><p>Off Campus #2 — the lovey-dovey (okay, slightly naughty) hockey romance I'd never admit to.</p></div></div></div>
       <div class="ncard"><div class="k">Playing</div><h3>Ghost of Tsushima</h3><p>Wind-guided. Lost off a cliff twice. F1 and UFC when I need a break from the island.</p></div>
       
@@ -305,7 +310,7 @@
 
   <section id="contact" class="contact reveal">
     <h2>Got something on fire? Or just want to talk shop?</h2>
-    <div class="clinks"><a href="mailto:jones.xavier0987@gmail.com">jones.xavier0987@gmail.com →</a><a href="https://github.com/Jonesxavier">GitHub ↗</a><a href="https://www.linkedin.com/in/jonesxavier0987">LinkedIn ↗</a></div>
+    <div class="clinks"><a class="mailbtn" href="mailto:jones.xavier0987@gmail.com"><span class="lbl">Constructive criticism / feedback</span><span class="rev">jones.xavier0987@gmail.com</span></a><a href="https://github.com/Jonesxavier"><span class="lbl">GitHub &#8599;</span><span class="rev">want to f*rk my code</span></a><a href="https://www.linkedin.com/in/jonesxavier0987"><span class="lbl">LinkedIn &#8599;</span><span class="rev">Check me out (professionally)</span></a></div>
   </section>
 </div>
 <footer class="wrap"><span>© 2026 Jones Xavier</span><span>SRE · automation · the occasional island</span></footer>
