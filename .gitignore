@@ -2,3 +2,19 @@ node_modules
 .DS_Store
 *.local
 .vercel
+
+# Claude agent session artifacts — never part of this repo
+local-agent-mode-sessions/
+7bbeba68-ac5c-4a6e-8073-efd4c58648f4/
+.claude/
+
+# Personal SRE docs — kept on disk, not published
+SRE Documents/
+SRE Documents.zip
+SRE Requirements.pdf
+SRE.pdf
+Server list Aix.zip
+Golden Disk Snapshot - DB Refresh Runbook.docx
+Networking_HandsOn_Field_Guide.docx
+Restore-AxDbFromBacpac.ps1
+sre-learning-library.docx
